@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Register</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./css/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="./functions.js"></script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+</style>
+</head>
+<body class="w3-light-grey">
+<!---------------------------- Navigation Bar Start ---------------------------->
+<script>navBar();</script>
+<!---------------------------- Navigation Bar End ---------------------------->
+<div class="unique-form-container">
+    <h2>Registration</h2>
+    <!---------------------------- Form Start ---------------------------->
+    <form action="./register" method="post">
+        <!-- first name -->
+        <label for="firstname">First Name:</label>
+        <input type="text" id="firstname" name="firstname" required>
+        <!-- last name -->
+        <label for="lastname">Last Name:</label>
+        <input type="text" id="lastname" name="lastname" required>
+        <!-- email -->
+        <label for="username">Email:</label>
+        <input type="text" id="username" name="username" required>
+        <!-- password -->
+        <label for="password">Password:</label>
+        <input type="text" id="password" name="password" required>
+        <!-- form submit -->
+        <p style="text-align: center;"><button type="submit" class="niceButton">Login</button></p>
+    </form>
+    <!---------------------------- Navigation Bar End ---------------------------->
+</div>
+
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Team</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./css/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="./functions.js"></script>
+<style>
+/* General Body Styles */
+body, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway', Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+/* Hero Banner */
+.hero {
+    background-image: url('./images/team-banner.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 50vh;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Title of the Page */
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 40px;
+}
+
+/* Team Section Layout */
+.team-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Profile Card */
+.profile-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Alternate Left and Right Layout */
+.profile-card:nth-child(odd) {
+    flex-direction: row-reverse;
+}
+
+.profile-card:nth-child(even) {
+    flex-direction: row;
+}
+
+/* Image Styling for Circular Profile Images */
+.profile-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+
+/* Bio Content Styling */
+.profile-bio {
+    text-align: left;
+    max-width: 600px;
+}
+
+/* Name and Role Styling */
+.profile-name {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.profile-role {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Inquiry Form Button */
+.inquiry-button {
+    display: inline-block;
+    background-color: #4a7c89;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.inquiry-button:hover {
+    background-color: #628edc;
+    transform: scale(1.05);
+}
+
+.contactinfo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+</style>
+</head>
+<body class="w3-light-grey">
+
+<!---------------------------- Navigation Bar Start ---------------------------->
+<script>navBar();</script>
+<!---------------------------- Navigation Bar End ---------------------------->
+
+<!-- Hero Section -->
+<div class="hero">
+    <h1>Contact Us</h1>
+</div>
+
+<!-- Contact Us Section -->
+<div class="w3-content w3-padding">
+    <div class="contactinfo">
+        <p>Hawaiian & Pacific Collections Department</p>
+        <p>Fifth Floor, Hamilton Library, 2550 McCarthy Mall, Honolulu, HI 96822</p>
+        <p>Phone: 808-956-8264</p>
+        <p>Email: <a href="mailto:hawnpac@hawaii.edu">hawnpac@hawaii.edu</a></p>
+    </div>
+    <div class="w3-center">
+        <p>Looking for specific materials or need help with an advanced search?</p>
+        <a href="inquiry_form.html" class="inquiry-button">Visit the Inquiry Form</a>
+    </div>
+</div>
+
+<hr>
+            <h1>Meet the Team</h1>
+            <div class="team-container">
+                    <!-- Jodie Mattos -->
+                    <div class="profile-card">
+                        <img src="images/Mattos_Jodie.jpg" alt="Jodie Mattos" class="profile-photo">
+                        <div class="profile-bio">
+                            <div class="profile-name">Jodie Mattos</div>
+                            <div class="profile-role">Librarian V</div>
+                            <p class="profile-description">
+                                Hawaiian Collection Librarian and Department Chair
+                                <br>
+                                Pacific CollectionQ Librarian
+                                <br>
+                                Hawaiian and Pacific Collections
+                                <br>
+                                Public Services Division
+                                <br>
+                                <a href="mailto:jodie@hawaii.edu">jodie@hawaii.edu</a>
+                                <br>
+                                (808) 956-2851
+                            </p>
+                        </div>
+                    </div>
+            
+        <!-- Stu Dawrs -->
+        <div class="profile-card">
+            <img src="images/Dawrs_Stu.jpg" alt="Stu Dawrs" class="profile-photo">
+            <div class="profile-bio">
+                <div class="profile-name">Stu Dawrs</div>
+                <div class="profile-role">Librarian V</div>
+                <p class="profile-description">
+                    Pacific Collection Librarian
+                    <br>
+                    Hawaiian and Pacific Collections
+                    <br>
+                    Public Services Division
+                    <br>
+                    <a href="mailto:dawrs@hawaii.edu">dawrs@hawaii.edu</a>
+                    <br>
+                    (808) 956-9779
+                </p>
+            </div>
+        </div>
+    <!-- Eleanor Kleiber -->
+    <div class="profile-card">
+        <img src="images/Eleanor.png" alt="Eleanor Kleiber" class="profile-photo">
+        <div class="profile-bio">
+            <div class="profile-name">Eleanor Kleiber</div>
+            <div class="profile-role">Librarian V</div>
+            <p class="profile-description">
+                Pacific Collection Librarian
+                <br>
+                Hawaiian and Pacific Collections
+                <br>
+                Public Services Division
+                <br>
+                <a href="mailto:ekleiber@hawaii.edu">ekleiber@hawaii.edu</a>
+                <br>
+                (808) 956-2847
+            </p>
+        </div>
+    </div>
+         <!-- Dore Minatodani -->
+         <div class="profile-card">
+            <img src="images/Minatodani_Dore.jpg" alt="Dore Minatodani" class="profile-photo">
+            <div class="profile-bio">
+                <div class="profile-name">Dore Minatodani</div>
+                <div class="profile-role">Librarian III</div>
+                <p class="profile-description">
+                    Pacific Collection Librarian
+                    <br>
+                    Hawaiian and Pacific Collections
+                    <br>
+                    Public Services Division
+                    <br>
+                    <a href="mailto:dorem@hawaii.edu">dorem@hawaii.edu</a>
+                    <br>
+                    (808) 956-2852
+                </p>
+            </div>
+        </div>
+             <!-- Kapena Shim -->
+             <div class="profile-card">
+                <img src="images/Kepena.png" alt="Kapena Shim" class="profile-photo">
+                <div class="profile-bio">
+                    <div class="profile-name">Kapena Shim</div>
+                    <div class="profile-role">Librarian III</div>
+                    <p class="profile-description">
+                        Pacific Collection Librarian
+                        <br>
+                        Hawaiian and Pacific Collections
+                        <br>
+                        Public Services Division
+                        <br>
+                        <a href="mailto:kapena@hawaii.edu">kapena@hawaii.edu</a>
+                        <br>
+                        (808) 956-9296
+                    </p>
+                </div>
+            </div>
+
+        <!-- Benjamin Dias -->
+        <div class="profile-card">
+            <img src="images/Ben.png" alt="Benjamin Dias" class="profile-photo">
+            <div class="profile-bio">
+                <div class="profile-name">Benjamin Dias</div>
+                <div class="profile-role">Library Assistant IV</div>
+                <p class="profile-description">
+                    Hawaiian and Pacific Collections
+                    <br>
+                    Public Services Division
+                    <br>
+                    <a href="mailto:bjdias@hawaii.edu">bjdias@hawaii.edu</a>
+                    <br>
+                    (808) 956-8264
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

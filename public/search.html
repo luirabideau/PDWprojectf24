@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Search</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./css/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="./functions.js"></script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+</style>
+</head>
+<body class="w3-light-grey">
+<!---------------------------- Navigation Bar Start ---------------------------->
+<script>navBar();</script>
+<!---------------------------- Navigation Bar End ---------------------------->
+
+<div class="unique-form-container">
+    <h2>Search Records</h2>
+    <form action="./executeSearch" method="post">
+        <!-- Text Input -->
+        <div class="form-group">
+            <label for="searchInput">Search</label>
+            <input type="text" id="searchInput" name="searchInput" placeholder="Enter your search term...">
+        </div>
+
+        <!-- Dropdown -->
+        <div class="form-group">
+            <label for="searchType">Search By</label>
+            <select id="searchType" name="searchType">
+                <option value="Title">Title</option>
+                <option value="Author_ID">Author</option>
+                <option value="Department_ID">Department</option>
+                <option value="Publisher_ID">Publisher</option>
+                <option value="Subject">Subject</option>
+            </select>
+        </div>
+
+            <!-- Radio Buttons -->
+            <div class="radio-group">
+                <label><input type="radio" id="avRadio" name="format" value="AV"> AV</label>
+                <label><input type="radio" id="mapsRadio" name="format" value="Map"> Maps</label>
+                <label><input type="radio" id="microfilmRadio" name="format" value="Record" checked> Microfilm</label>
+            </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="niceButton">Search</button>
+    </form>
+</div>
+</body>
+</html>

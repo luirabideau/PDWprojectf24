@@ -1,0 +1,977 @@
+/*Inserting w3 schools css code with the implemented changes from xin */
+/* W3.CSS 4.15 December 2020 by Jan Egil and Borge Refsnes */
+
+body {
+    background-color: #fff; /* Same light grey background */
+    margin: 0; /* Remove default margins */
+    padding: 0; /* Remove default padding */
+    font-family: "Raleway", Arial, sans-serif; /* Ensure consistent font styling */
+}
+/* Global header styling */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway', Arial, sans-serif; /* Consistent font */
+    font-weight: 700; /* Bold for emphasis */
+    color: #333; /* Dark gray color */
+    margin-bottom: 20px; /* Space below headers */
+    text-align: center; /* Center-align all headers */
+}
+/* Hero Section Styling */
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    color: white; /* Make the text white */
+}
+
+.hero p {
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
+
+/* Specific header sizes */
+h1 {
+    font-size: 3rem; /* Largest header for main titles */
+}
+
+h2 {
+    font-size: 2.5rem; /* Slightly smaller for section titles */
+}
+
+h3 {
+    font-size: 2rem; /* Subtitles or smaller headings */
+}
+
+h4 {
+    font-size: 1.5rem; /* Sub-subtitles */
+}
+
+h5 {
+    font-size: 1.2rem; /* For minor headings */
+}
+
+h6 {
+    font-size: 1rem; /* Smallest headers */
+}
+
+.w3-serif {
+    font-family: serif
+}
+
+.w3-sans-serif {
+    font-family: sans-serif
+}
+
+.w3-cursive {
+    font-family: cursive
+}
+
+.w3-monospace {
+    font-family: monospace
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: "Segoe UI",Arial,sans-serif;
+    font-weight: 400;
+    margin: 10px 0
+}
+
+.w3-wide {
+    letter-spacing: 4px
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 20px 0
+}
+
+/* makes the buttons look "nice" */
+.w3-btn,.w3-button {
+    border: none;
+    display: inline-block;
+    padding: 8px 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background-color: inherit;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap
+}
+
+
+/* spacing of the buttons next to each other, can delete, barely affects visual */
+.w3-bar .w3-dropdown-hover,.w3-bar .w3-dropdown-click {
+    position: static;
+    float: left
+}
+
+
+
+/* lui said this is for ensuring that the media (everything that starts with @media) looks good on various devices? but like i dont know its rlly needed tbh */
+@media (min-width: 601px) {
+    .w3-col.m1 {
+        width:8.33333%
+    }
+
+    .w3-col.m2 {
+        width: 16.66666%
+    }
+
+    .w3-col.m3,.w3-quarter {
+        width: 24.99999%
+    }
+
+    .w3-col.m4,.w3-third {
+        width: 33.33333%
+    }
+
+    .w3-col.m5 {
+        width: 41.66666%
+    }
+
+    .w3-col.m6,.w3-half {
+        width: 49.99999%
+    }
+
+    .w3-col.m7 {
+        width: 58.33333%
+    }
+
+    .w3-col.m8,.w3-twothird {
+        width: 66.66666%
+    }
+
+    .w3-col.m9,.w3-threequarter {
+        width: 74.99999%
+    }
+
+    .w3-col.m10 {
+        width: 83.33333%
+    }
+
+    .w3-col.m11 {
+        width: 91.66666%
+    }
+
+    .w3-col.m12 {
+        width: 99.99999%
+    }
+}
+
+@media (min-width: 993px) {
+    .w3-col.l1 {
+        width:8.33333%
+    }
+
+    .w3-col.l2 {
+        width: 16.66666%
+    }
+
+    .w3-col.l3 {
+        width: 24.99999%
+    }
+
+    .w3-col.l4 {
+        width: 33.33333%
+    }
+
+    .w3-col.l5 {
+        width: 41.66666%
+    }
+
+    .w3-col.l6 {
+        width: 49.99999%
+    }
+
+    .w3-col.l7 {
+        width: 58.33333%
+    }
+
+    .w3-col.l8 {
+        width: 66.66666%
+    }
+
+    .w3-col.l9 {
+        width: 74.99999%
+    }
+
+    .w3-col.l10 {
+        width: 83.33333%
+    }
+
+    .w3-col.l11 {
+        width: 91.66666%
+    }
+
+    .w3-col.l12 {
+        width: 99.99999%
+    }
+}
+
+
+
+@media (max-width: 1205px) {
+    .w3-auto {
+        max-width:95%
+    }
+}
+
+@media (max-width: 600px) {
+    .w3-modal-content {
+        margin:0 10px;
+        width: auto!important
+    }
+
+    .w3-modal {
+        padding-top: 30px
+    }
+
+    .w3-dropdown-hover.w3-mobile .w3-dropdown-content,.w3-dropdown-click.w3-mobile .w3-dropdown-content {
+        position: relative
+    }
+
+    .w3-hide-small {
+        display: none!important
+    }
+
+    .w3-mobile {
+        display: block;
+        width: 100%!important
+    }
+
+    .w3-bar-item.w3-mobile,.w3-dropdown-hover.w3-mobile,.w3-dropdown-click.w3-mobile {
+        text-align: center
+    }
+
+    .w3-dropdown-hover.w3-mobile,.w3-dropdown-hover.w3-mobile .w3-btn,.w3-dropdown-hover.w3-mobile .w3-button,.w3-dropdown-click.w3-mobile,.w3-dropdown-click.w3-mobile .w3-btn,.w3-dropdown-click.w3-mobile .w3-button {
+        width: 100%
+    }
+}
+
+@media (max-width: 768px) {
+    .w3-modal-content {
+        width:500px
+    }
+
+    .w3-modal {
+        padding-top: 50px
+    }
+}
+
+@media (min-width: 993px) {
+    .w3-modal-content {
+        width:900px
+    }
+
+    .w3-hide-large {
+        display: none!important
+    }
+
+    .w3-sidebar.w3-collapse {
+        display: block!important
+    }
+}
+
+@media (max-width: 992px) and (min-width:601px) {
+    .w3-hide-medium {
+        display:none!important
+    }
+}
+
+@media (max-width: 992px) {
+    .w3-sidebar.w3-collapse {
+        display:none
+    }
+
+    .w3-main {
+        margin-left: 0!important;
+        margin-right: 0!important
+    }
+
+    .w3-auto {
+        max-width: 100%
+    }
+}
+
+/* font sizes */
+
+.w3-tiny {
+    font-size: 10px!important
+}
+
+.w3-small {
+    font-size: 12px!important
+}
+
+.w3-medium {
+    font-size: 15px!important
+}
+
+.w3-large {
+    font-size: 18px!important
+}
+
+.w3-xlarge {
+    font-size: 24px!important
+}
+
+.w3-xxlarge {
+    font-size: 36px!important
+}
+
+.w3-xxxlarge {
+    font-size: 48px!important
+}
+
+.w3-jumbo {
+    font-size: 64px!important
+}
+
+.w3-left-align {
+    text-align: left!important
+}
+
+.w3-right-align {
+    text-align: right!important
+}
+
+.w3-justify {
+    text-align: justify!important
+}
+
+.w3-center {
+    text-align: center!important
+}
+
+
+/* alignment */
+.w3-margin {
+    margin: 16px!important
+}
+
+.w3-margin-top {
+    margin-top: 16px!important
+}
+
+.w3-margin-bottom {
+    margin-bottom: 16px!important
+}
+
+.w3-margin-left {
+    margin-left: 16px!important
+}
+
+.w3-margin-right {
+    margin-right: 16px!important
+}
+
+.w3-padding-small {
+    padding: 4px 8px!important
+}
+
+.w3-padding {
+    padding: 8px 16px!important
+}
+
+.w3-padding-large {
+    padding: 12px 24px!important
+}
+
+.w3-padding-16 {
+    padding-top: 16px!important;
+    padding-bottom: 16px!important
+}
+
+.w3-padding-24 {
+    padding-top: 24px!important;
+    padding-bottom: 24px!important
+}
+
+.w3-padding-32 {
+    padding-top: 32px!important;
+    padding-bottom: 32px!important
+}
+
+.w3-padding-48 {
+    padding-top: 48px!important;
+    padding-bottom: 48px!important
+}
+
+.w3-padding-64 {
+    padding-top: 64px!important;
+    padding-bottom: 64px!important
+}
+
+.w3-padding-top-64 {
+    padding-top: 64px!important
+}
+
+.w3-padding-top-48 {
+    padding-top: 48px!important
+}
+
+.w3-padding-top-32 {
+    padding-top: 32px!important
+}
+
+.w3-padding-top-24 {
+    padding-top: 24px!important
+}
+
+.w3-left {
+    float: left!important
+}
+
+
+.w3-right {
+    float: right!important
+}
+
+/* NAV BAR - changes made to look more like original css here to fix small padding issues */ 
+.w3-bar {
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.087); /* Adds a subtle shadow */
+    z-index: 1000; /* Ensures the nav bar stays above other elements */
+    position: relative; /* Helps the shadow appear properly */
+}
+
+.w3-bar .w3-bar-item {
+    padding: 8px 16px;
+    float: left;
+    width: auto;
+    border: none;
+    display: block;
+    outline: 0;
+}
+
+.w3-bar img {
+    height: 30px;
+}
+
+.w3-bar .w3-left {
+    display: flex;
+    align-items: center;
+}
+
+.w3-bar .w3-right {
+    float: right;
+}
+
+.w3-bar .w3-button {
+    white-space: normal;
+    text-decoration: none;
+    color: inherit;
+    background-color: inherit;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.w3-bar .w3-button:hover {
+    color: #000 !important;
+    background-color: #ccc !important;
+}
+
+/* Active Button Highlight */
+.w3-bar .w3-green {
+    background-color: #fff !important;
+    color: #000 !important;
+
+}
+
+/* Responsive Styling for Mobile */
+@media (max-width: 600px) {
+    .w3-bar .w3-bar-item.w3-mobile {
+        display: block;
+        width: 100% !important;
+        text-align: center;
+    }
+}
+.hero {
+    background-image: url('./images/Books.jpg'); /* Replace with actual image path */
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
+    color: white;
+    display: flex;
+    flex-direction: column; /* Ensure child elements stack vertically */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative; /* For overlay */
+    padding: 20px; /* Add some padding to avoid content overlap */
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay */
+    z-index: 1; /* Ensure overlay is below content */
+}
+
+.hero h1,
+.hero p,
+.hero .unique-form-container {
+    position: relative; /* Ensures these elements are above the overlay */
+    z-index: 2;
+}
+
+.hero .unique-form-container {
+    background: rgba(255, 255, 255, 0.95); /* Light background for contrast */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds some depth */
+    max-width: 400px;
+    width: 100%;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero h1,
+.hero p {
+    animation: fadeIn 1.5s ease-out;
+}
+/* ALL THIS UPCOMING CODE EFFECTS THE INDEX.HTML PAGE */
+/*PUTS THE CARDS ALL ON ONE LINE AND MAKES THEM LOOK NICE */
+/* General styling for all screens */
+p, h1, h2, h3, h4, h5, h6 {
+    margin: 30px; /* Adds margin around all text elements */
+}
+.text-content {
+    margin: 20px; /* Adds margin around text inside the container */
+}
+
+.w3-row-padding {
+    display: flex; /* Enables flexbox layout */
+    flex-wrap: nowrap; /* Prevents wrapping to the next row */
+    justify-content: space-between; /* Spreads cards evenly across the row */
+    gap: 16px; /* Adds spacing between the cards */
+}
+
+.w3-card {
+    flex: 1 1 auto; /* Ensures cards take up equal space */
+    max-width: 300px; /* Restricts width for smaller screens */
+    height: auto; /* Adjusts height dynamically */
+    margin: 0 8px; /* Adds horizontal spacing between cards */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12); /* Card shadow for depth */
+    padding: 16px; /* Inner spacing for content */
+    background: #fff; /* Background color for the card */
+    border-radius: 8px; /* Rounded corners for a modern look */
+    text-align: center; /* Centers content within the card */
+    display: flex; /* Use flexbox for inner content alignment */
+    flex-direction: column; /* Align items vertically */
+    justify-content: space-between; /* Ensures content is spaced evenly */
+    height: 100%; /* Ensures cards maintain equal height */
+    animation: fadeInScale 0.6s ease-in-out; /* Add fade and scale animation */
+    animation-fill-mode: both; /* Ensures the animation's final state persists */
+}
+
+/* Target headers inside the .w3-card for consistency */
+.w3-card h3 {
+    font-size: 1.5rem; /* Set header size inside the card */
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0; /* Ensure spacing is uniform */
+}
+
+.w3-card p {
+    font-size: 1rem; /* Ensure uniform body text size */
+    color: #555; /* Subtle gray text color for readability */
+    line-height: 1.5;
+}
+
+/* Make cards larger on bigger screens */
+@media (min-width: 1200px) {
+    .w3-card {
+        flex: 1 1 45%; /* Cards take up more width */
+        max-width: 450px; /* Allow larger maximum width */
+    }
+
+    .w3-row-padding {
+        gap: 24px; /* Increase spacing between cards */
+    }
+}
+
+/* Mobile responsiveness: Adjust layout for smaller screens */
+@media (max-width: 768px) {
+    .w3-row-padding {
+        flex-wrap: wrap; /* Allow wrapping for small screens */
+    }
+
+    .w3-card {
+        flex: 1 1 100%; /* Cards occupy full width */
+        max-width: unset; /* Remove width restrictions */
+    }
+}
+
+/* Animation keyframes */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9); /* Start slightly smaller */
+    }
+    to {
+        opacity: 1;
+        transform: scale(1); /* Grow to full size */
+    }
+}
+/*the our projects portion of the homepage */
+
+/* Project Section Styling */
+.project-section {
+    padding: 50px 20px;
+    background-color: #fff; /* White background for the section itself */
+    margin: 40px auto;
+    max-width: 800px;
+}
+
+/* Section Title */
+.section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Section Description */
+.section-description {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Learn More Button */
+.learn-more-button {
+    font-size: 1.1rem;
+    padding: 12px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover Effect for Button */
+.learn-more-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+/* Line Under Section Titles */
+.section-line {
+    width: 150px; /* Length of the line */
+    height: 3px; /* Thickness of the line */
+    background-color: #007bff; /* Blue color for the line */
+    margin: 10px auto; /* Center the line and add spacing */
+    border-radius: 2px; /* Slight rounding for a polished look */
+}
+
+/* END OF INDEX.HTML code (propabably more around this tbh but yah*/
+
+/*--------START OF ABOUT.HTML CODE --------*/
+/* About Section Styling I WANT TO UPDATE THIS LATER */
+ul {
+    list-style: none; /* Remove default bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0 auto; /* Center the list horizontally */
+    max-width: 800px; /* Limit the width for readability */
+    text-align: left; /* Align text to the left inside the list */
+}
+
+/* Styling for Each List Item */
+ul li {
+    font-size: 1.1rem; /* Font size for list items */
+    color: #555; /* Subtle text color for readability */
+    line-height: 1.8; /* Adds space between lines */
+    padding: 5px 0; /* Adds padding for spacing between items */
+    width: 100%; /* Ensures each list item takes full width */
+    margin-bottom: 10px; /* Space between list items */
+}
+/* END OF ABOUT.HTML CODE */
+
+
+
+/*--------TEAMS.HTML CODE --------*/
+
+
+/* Profile Card with Animation */
+.profile-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 600px; /* Set a consistent width */
+    height: 250px; /* Set a consistent height */
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateX(-50px); /* Start off-screen */
+    animation: fadeInSlide 0.8s ease-out forwards; /* Apply animation */
+}
+
+/*Contact info */
+.contactinfo{
+    text-align: center;
+}
+/* Stagger the animation delay for each profile card */
+.profile-card:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.profile-card:nth-child(2) {
+    animation-delay: .5s;
+}
+
+.profile-card:nth-child(3) {
+    animation-delay: 0.8s;
+}
+
+.profile-card:nth-child(4) {
+    animation-delay: 0.9s;
+}
+
+.profile-card:nth-child(5) {
+    animation-delay: 0.9s;
+}
+
+/* Animation Keyframes for Fade In and Slide */
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateX(-50px); /* Start from the left */
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0); /* End at normal position */
+    }
+}
+
+/* ==================================================== SEARCH BOX CSS begin ==================================================== */
+.hero .unique-form-container {
+    position: static; /* Override position set by .hero */
+    z-index: 50; /* Ensure it stays above the overlay */
+    background: rgba(255, 255, 255, 0.9); /* Add a light background for visibility */
+    border-radius: 8px; /* Match existing form styles */
+    padding: 20px;
+    max-width: 400px;
+    margin: 20px auto; /* Center the form horizontally */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a shadow for contrast */
+}
+
+.unique-form-container {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+    z-index: 2; /* Ensure it stays above the overlay */
+}
+
+.unique-form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.unique-form-container .form-group {
+    margin-bottom: 15px;
+}
+
+.unique-form-container label {
+    display: block; /* Ensures each label takes its own line */
+    text-align: left; /* Aligns the label text to the left */
+    font-weight: bold; /* Keeps the text bold for visibility */
+    margin-bottom: 5px; /* Adds some spacing below the label */
+    color: #555; /* A softer color for the label text */
+}
+
+input[type="text"], 
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Ensures padding doesn’t affect width */
+}
+
+.radio-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.radio-group label {
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+}
+
+.radio-group input {
+    margin-right: 5px;
+}
+
+/* Button Styles */
+.niceButton {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #4a7c89;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.niceButton:hover {
+    background-color: #628edc;
+    transform: scale(1.05);
+}
+
+/* Register Link */
+.niceLink {
+    display: block;
+    margin-top: 15px;
+    color: #4a7c89;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.niceLink:hover {
+    color: #628edc;
+}
+
+/* ==================================================== SEARCH BOX CSS end ==================================================== */
+
+
+/* Style for the account container */
+.account-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 90%; /* Allows it to be responsive */
+    box-sizing: border-box; /* Includes padding in width */
+    text-align: center;
+}
+
+/* Account details section */
+.account-details-box {
+    margin-bottom: 20px;
+}
+
+.account-details-box h2 {
+    margin-bottom: 10px;
+    color: #0077b6;
+}
+
+.account-details-box p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.account-details-box span {
+    font-weight: bold;
+    color: #555;
+}
+
+/* Reservations table styles */
+.account-reservations-title {
+    font-size: 1.5rem;
+    color: #0077b6;
+    margin-bottom: 10px;
+}
+
+.account-reservations-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.account-reservations-table th, .account-reservations-table td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.account-reservations-table th {
+    background-color: #0077b6;
+    color: white;
+}
+
+.account-reservations-table tr:hover {
+    background-color: #f1f1f1;
+}
+/*maps page*/
+.island-links-section {
+    margin: 20px auto; /* Center the section */
+    padding: 15px; /* Add padding for spacing */
+    max-width: 300px; /* Make the section smaller */
+    text-align: left; /* Align text to the left */
+    background-color: #f4f4f4; /* Subtle light gray background */
+    border-radius: 6px; /* Smooth, rounded corners */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    font-family: "Arial", sans-serif; /* Professional font */
+    font-size: 0.9rem; /* Slightly smaller font size */
+}
+
+.island-links-section h3 {
+    font-size: 1.2rem; /* Smaller title font */
+    font-weight: bold; /* Highlight the title */
+    color: #333; /* Darker text color */
+    text-align: center; /* Center-align the title */
+    margin-bottom: 10px; /* Space below the title */
+}
+
+.island-links-section ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margins */
+}
+
+.island-links-section li {
+    margin: 5px 0; /* Add vertical spacing */
+}
+
+.island-links-section a {
+    text-decoration: none; /* Remove underline from links */
+    color: #0077b6; /* Professional blue color */
+    padding: 5px; /* Add padding for better clickability */
+    display: block; /* Make the entire line clickable */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
+}
+
+.island-links-section a:hover {
+    background-color: #e0f0ff; /* Light blue hover background */
+    color: #0056b3; /* Darker blue on hover */
+    border-radius: 4px; /* Round edges on hover */
+}
+/*-------RECORDS.HTML CODE --------*/
