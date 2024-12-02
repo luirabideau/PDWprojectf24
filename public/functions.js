@@ -102,26 +102,6 @@ function reloadPageFor1Seconds() {
   }, 1000); // 1000 milliseconds = 1 second
 }
 
-/*------------------------- INVOICE AND SHOPPING CART PAGE SPECIFIC FUNCTIONS --------------------------*/
-
-function updateQuantity(location, productIndex){
-  // get the shopping cart data for this user
-  loadJSON(`update_cart?location=${location}&productIndex=${productIndex}&value=${document.getElementById(`quantityTextbox${location}_${productIndex}`).value}`, function (response) {
-  // Parsing JSON string into object
-  shopping_cart = JSON.parse(response);
-  reloadPageFor1Seconds();
-});
-}
-
-function updateFav(location, productIndex){
-  console.log(location, productIndex, document.getElementById(`checkbox${location}_${productIndex}`).value);
-  // get the shopping cart data for this user
-  loadJSON(`update_fav?location=${location}&productIndex=${productIndex}&value=${document.getElementById(`checkbox${location}_${productIndex}`).value}`, function (response) {
-  // Parsing JSON string into object
-  shopping_cart = JSON.parse(response);
-});
-}
-
 
 /*----------------------------------------- COOKIE FUNCTIONs -------------------------------------------*/
 
