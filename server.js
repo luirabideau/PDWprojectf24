@@ -18,7 +18,7 @@ const { type } = require('os');
 
 //USER DATA STUFF
 let user_reg_data = {};
-let user_data_filename = __dirname + '/user_data.json';
+let user_data_filename = __dirname + '/user_data.json'; // takes the information from the user_data.json file
 
 app.use(express.static('./public'));
 app.use(myParser.urlencoded({ extended: true }));
@@ -126,41 +126,21 @@ app.post('/login', function (request, response){// Validates a users login, and 
         if(cartCookie == 0) {
           response.redirect(`./index.html`)
         } else {
-          response.redirect(`./account.html`);
+          if(user_reg_data[the_username].rank = "1"){
+            response.redirect(`./loggedIn1.html`)
+            } else {
+              response.redirect(`./loggedIn2.html`)}
         }
      } else {
-        response.redirect(`./login.html?error=pass`)
+        response.redirect(`./index.html?error=pass`) // redirects if password is wrong
      }
   } else { // else the user does not exist 
-     response.redirect(`./login.html?error=user`);
+     response.redirect(`./index.html?error=user`); // redirects if user DNE
   }
 });
 
-app.post('/register', function (request, response){// Makes a new user while validating that info, then sends the new user to the shopping cart
-  let username = request.body.username.toLowerCase();
-  user_reg_data[username] = {};
-  user_reg_data[username].password = request.body.password;
-  user_reg_data[username].username = request.body.username;  
-  user_reg_data[username].name = request.body.firstname + ' ' + request.body.lastname;
-  // add it to the user_data.json
-  fs.writeFileSync(user_data_filename, JSON.stringify(user_reg_data));
-  if(typeof user_reg_data[username] !== 'undefined' && typeof user_reg_data[username].password !== 'undefined' && typeof user_reg_data[username].username !== 'undefined'){
-     // add new logged in user, place above the redirect
-     userLoggedin[username] = true; 
-     response.cookie("username", username, {expire: Date.now() + 30 * 60 * 1000});// send a username cookie to indicate logged in
-     response.cookie("name", user_reg_data[username].name, {expire: Date.now() + 30 * 60 * 1000});// make a name cookie
-     response.cookie("loggedIn", 1, {expire: Date.now() + 30 * 60 * 1000});// make a logged in cookie
-     let cartCookie = Number(request.body.total);
-        if(cartCookie == 0) {
-          response.redirect(`./index.html`)
-        } else {
-          response.redirect(`./account.html`);
-        }  
-  } else {
-    response.redirect(`./register.html`)
-  }
-});  
 
+// logout function
 app.get('/logout', function (request, response){// Redirects user to home page after logging out
   response.redirect(`./index.html`)
 });

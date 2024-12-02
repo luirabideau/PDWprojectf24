@@ -4,9 +4,9 @@
 <title>Login</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="./css/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="./css/style.css">
 <script src="./functions.js"></script>
 <style>
 /* General Body Styles */
@@ -132,7 +132,30 @@ input[type="email"], input[type="password"] {
 <body class="w3-light-grey">
 
 <!---------------------------- Navigation Bar Start ---------------------------->
-<script>navBar();</script>
+<header>
+    <div class="logo">
+        <a href="./index.html"><img src="./images/CALL_logo.png"></a>
+    </div>
+    <div class="branding">
+        <h1>EMSync</h1>
+        <p>CALL HR Database</p>
+    </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#employee-management">Employee Management</a></li>
+            <li><a href="#payroll">Payroll</a></li>
+            <li><a href="#insurance">Health Insurance</a></li>
+            <li><a href="#upcoming-training">Upcoming Training</a></li>
+            <li><a href="#grievances">Grievances</a></li>
+        </ul>
+        <div class="login-button">
+            <a href="./login.html">
+                <img src="./images/login.png" alt="Staff Icon" class="login-icon"> Login
+            </a>
+        </div>
+    </nav>
 <!---------------------------- Navigation Bar End ---------------------------->
 
 <!-- Hero Section -->
@@ -157,7 +180,6 @@ input[type="email"], input[type="password"] {
                 loginError();
             </script>
         </form>
-        <a href="./register.html" class="niceLink">Don't have an account? Register here</a>
     </div>
     <!---------------------------- Input Form End (who let Lui cook)---------------------------->
 </div>
@@ -165,7 +187,7 @@ input[type="email"], input[type="password"] {
 <!-- Librarian Login Section -->
 <div class="librarian-login-section">
     <p>
-        <a href="./librarian-login.html">Librarian Login Portal</a>
+        <a href="./staffLogin.html">Librarian Login Portal</a>
     </p>
 </div>
 

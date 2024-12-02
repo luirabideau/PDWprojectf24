@@ -15,40 +15,126 @@ function faviconInfo(){//contains favicon and css information
 }
 //nav bar - upated by Tassia for styling and adding a logo 
 //xin updated logo again and also adjusted order and name
-function navBar() {
+function navBar1() {
   let isloggedin = getCookie("loggedIn");
   let nameCookie = getCookie("name");
   let total = getCookie("totalIC");
   if (isloggedin == 1) {
     document.write(`
-      <div class="w3-bar w3-white w3-large">
-        <div class="w3-bar-item w3-left" style="display: flex; align-items: center;">
-          <img src="./images/HAPClogo.png" alt="Logo" style="height: 40px;">
+   <header>
+    <div class="logo">
+        <a href="./index.html"><img src="./images/CALL_logo.png"></a>
+    </div>
+    <div class="branding">
+        <h1>EMSync</h1>
+        <p>CALL HR Database</p>
+    </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#employee-management">About</a></li>
+            <li><a href="#employee-management">Contact</a></li>
+            <li><a href="#employee-management">Management</a></li>
+            <li><a href="./logout" onclick="logout()">Log Out</a></li>
+        </ul>
+        <div class="login-button">
+            <a href="./index.html">
+                <img src="./images/login.png" alt="Staff Icon" class="login-icon"> Login
+            </a>
         </div>
-        <a href="./index.html" class="w3-bar-item w3-button w3-green w3-mobile">Home</a>
-        <a href="./about.html" class="w3-bar-item w3-button w3-mobile">About</a>
-        <a href="./search.html" class="w3-bar-item w3-button w3-mobile">Search</a>
-        <a href="./reports.html" class="w3-bar-item w3-button w3-mobile">Reports</a>
-        <a href="./maps.html" class="w3-bar-item w3-button w3-mobile">Maps</a>
-        <a href="./team.html" class="w3-bar-item w3-button w3-mobile">Contact Us</a>
-        <a href="./account.html" class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">Account</a>
-        <a href="./logout" class="w3-bar-item w3-button w3-mobile" onclick="logout()">Log Out</a>
-      </div>
+    </nav>
     `);
   } else {
     document.write(`
-      <div class="w3-bar w3-white w3-large">
-        <div class="w3-bar-item w3-left" style="display: flex; align-items: center;">
-          <img src="./images/HAPClogo.png" alt="Logo" style="height: 30px;">
+   <header>
+    <div class="logo">
+        <a href="./index.html"><img src="./images/CALL_logo.png"></a>
+    </div>
+    <div class="branding">
+        <h1>EMSync</h1>
+        <p>CALL HR Database</p>
+    </div>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#employee-management">About</a></li>
+            <li><a href="#employee-management">Contact</a></li>
+            <li><a href="#employee-management">Management</a></li>
+        </ul>
+        <div class="login-button">
+            <a href="./index.html">
+                <img src="./images/login.png" alt="Staff Icon" class="login-icon"> Login
+            </a>
         </div>
-        <a href="./index.html" class="w3-bar-item w3-button w3-green w3-mobile">Home</a>
-        <a href="./about.html" class="w3-bar-item w3-button w3-mobile">About</a>
-        <a href="./search.html" class="w3-bar-item w3-button w3-mobile">Search</a>
-        <a href="./reports.html" class="w3-bar-item w3-button w3-mobile">Reports</a>
-        <a href="./maps.html" class="w3-bar-item w3-button w3-mobile">Maps</a>
-        <a href="./team.html" class="w3-bar-item w3-button w3-mobile">Contact Us</a>
-        <a href="./login.html" class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">Login</a>
-      </div>
+    </nav>
+    `);
+  }
+}
+
+function navBar2() {
+  let isloggedin = getCookie("loggedIn");
+  let nameCookie = getCookie("name");
+  let total = getCookie("totalIC");
+  if (isloggedin == 1) {
+    document.write(`
+   <header>
+    <div class="logo">
+        <a href="./index.html"><img src="./images/CALL_logo.png"></a>
+    </div>
+    <div class="branding">
+        <h1>EMSync</h1>
+        <p>CALL HR Database</p>
+    </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#employee-management">About</a></li>
+            <li><a href="#employee-management">Contact</a></li>
+            <li><a href="#employee-management">Payroll</a></li>
+            <li><a href="#employee-management">Grievances</a></li>
+            <li><a href="#employee-management">Training</a></li>
+            <li><a href="#employee-management">Applications</li>
+            <li><a href="#employee-management">Forms</a></li>
+            <li><a href="./logout" onclick="logout()">Log Out</a></li>
+        </ul>
+        <div class="login-button">
+            <a href="./index.html">
+                <img src="./images/login.png" alt="Staff Icon" class="login-icon"> Login
+            </a>
+        </div>
+    </nav>
+    `);
+  } else {
+    document.write(`
+   <header>
+    <div class="logo">
+        <a href="./index.html"><img src="./images/CALL_logo.png"></a>
+    </div>
+    <div class="branding">
+        <h1>EMSync</h1>
+        <p>CALL HR Database</p>
+    </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#employee-management">About</a></li>
+            <li><a href="#employee-management">Contact</a></li>
+            <li><a href="#employee-management">Payroll</a></li>
+            <li><a href="#employee-management">Grievances</a></li>
+            <li><a href="#employee-management">Training</a></li>
+            <li><a href="#employee-management">Applications</li>
+            <li><a href="#employee-management">Forms</a></li>
+            <li><a href="./logout" onclick="logout()">Log Out</a></li>
+        </ul>
+        <div class="login-button">
+            <a href="./index.html">
+                <img src="./images/login.png" alt="Staff Icon" class="login-icon"> Login
+            </a>
+        </div>
+    </nav>
     `);
   }
 }
