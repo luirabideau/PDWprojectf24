@@ -13,8 +13,7 @@ function faviconInfo(){//contains favicon and css information
       <link rel="shortcut icon" href="./images/letterR.png" type="image/png">
     `)
 }
-//nav bar - upated by Tassia for styling and adding a logo 
-//xin updated logo again and also adjusted order and name
+
 function navBar1() {
   let isloggedin = getCookie("loggedIn");
   let nameCookie = getCookie("name");
@@ -36,11 +35,10 @@ function navBar1() {
             <li><a href="#employee-management">About</a></li>
             <li><a href="#employee-management">Contact</a></li>
             <li><a href="#employee-management">Management</a></li>
-            <li><a href="./logout" onclick="logout()">Log Out</a></li>
         </ul>
         <div class="login-button">
-            <a href="./index.html">
-                <img src="./images/login.png" alt="Staff Icon" class="login-icon"> Login
+            <a href="./logout" onclick="logout()">
+                <img src="./images/login.png" alt="Staff Icon" class="login-icon"> Log Out
             </a>
         </div>
     </nav>
@@ -97,11 +95,10 @@ function navBar2() {
             <li><a href="#employee-management">Training</a></li>
             <li><a href="#employee-management">Applications</li>
             <li><a href="#employee-management">Forms</a></li>
-            <li><a href="./logout" onclick="logout()">Log Out</a></li>
         </ul>
         <div class="login-button">
-            <a href="./index.html">
-                <img src="./images/login.png" alt="Staff Icon" class="login-icon"> Login
+            <a href="./logout" onclick="logout()">
+                <img src="./images/login.png" alt="Staff Icon" class="login-icon"> Log Out
             </a>
         </div>
     </nav>
@@ -127,7 +124,6 @@ function navBar2() {
             <li><a href="#employee-management">Training</a></li>
             <li><a href="#employee-management">Applications</li>
             <li><a href="#employee-management">Forms</a></li>
-            <li><a href="./logout" onclick="logout()">Log Out</a></li>
         </ul>
         <div class="login-button">
             <a href="./index.html">
