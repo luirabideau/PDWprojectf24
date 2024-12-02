@@ -126,7 +126,7 @@ app.post('/login', function (request, response){// Validates a users login, and 
         if(cartCookie == 0) {
           response.redirect(`./index.html`)
         } else {
-          if(user_reg_data[the_username].rank = "1"){
+          if(user_reg_data[the_username].rank === "1"){
             response.redirect(`./loggedIn1.html`)
             } else {
               response.redirect(`./loggedIn2.html`)}
