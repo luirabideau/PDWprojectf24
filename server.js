@@ -192,6 +192,19 @@ app.get("/get-session-data", (req, res) => {
   console.log(req.session);
 });
 
+/*---------------------------------- PAYROLL STUFF ----------------------------------*/
+// Route to retrieve payroll data
+app.get('/retrievePayroll', (req, res) => {
+  const query = `SELECT * FROM timesheets WHERE = '1000123456'`;
+  db.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch payroll data' });
+          return;
+      }
+      res.json(results);
+  });
+});
 
 /*---------------------------------- SEARCH SQL ----------------------------------*/
 app.post("/executeSearch", (req, res) => {

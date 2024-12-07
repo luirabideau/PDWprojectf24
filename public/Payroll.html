@@ -25,7 +25,44 @@
     <main>
 
 
-        
+        <h1 style="text-align: center;">Employee Payroll Table</h1>
+        <table id="payrollTable">
+            <thead>
+                <tr>
+                    <th>Timesheet_ID</th>
+                    <th>Employee_ID</th>
+                    <th>Start_Date</th>
+                    <th>End_Date</th>
+                    <th>Hours</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+    
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrievePayroll')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('payrollTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.Timesheet_ID}</td>
+                                <td>${row.Employee_ID}</td>
+                                <td>${row.Start_Date}</td>
+                                <td>${row.End_Date}</td>
+                                <td>${row.Hours}</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching payroll data:', error));
+            });
+        </script>
 
 
 
