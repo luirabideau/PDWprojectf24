@@ -16,6 +16,7 @@ header {
     align-items: center; 
 }
 
+
 .logo {
     display: flex;
     justify-content: flex-start;
@@ -30,12 +31,397 @@ header {
 
 
 .branding {
-    text-align: left; 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+}
+
+.branding img.emsync-logo {
+    height: 140px;
+    width: auto; 
+}
+
+.branding .text-container {
     display: flex;
     flex-direction: column; 
     align-items: flex-start; 
 }
 
+.branding .text-container h1 {
+    margin: 0; /* Remove default margin */
+    font-size: 3rem; 
+    color: black;
+}
+
+.branding .text-container p {
+    margin: 0; /* Remove default margin */
+    margin-top: -3px; /* Add slight overlap or closeness */
+    font-size: 1rem; 
+    color: gray;
+}
+
+.branding h1 {
+    margin: 0;
+    font-size: 2rem; 
+    color: black; 
+}
+
+.branding p {
+    margin: 0;
+    font-size: 1rem; 
+    color: gray; 
+}
+
+header .branding h1 {
+    margin: 0;
+    font-size: 3rem;
+}
+
+header .branding p {
+    font-size: 1.3rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e0e0e5;
+    padding: 0 1rem;
+    width: 100%;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 2;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 1.2rem;
+}
+
+nav ul li a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Dropdown Styles */
+nav ul li.dropdown {
+    position: relative; /* Needed for the dropdown menu */
+}
+
+nav ul li .dropdown-content {
+    display: none; /* Hidden by default */
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 160px; /* Adjust based on the content size */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li .dropdown-content li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* Optional: to separate menu items */
+}
+
+nav ul li .dropdown-content li:last-child {
+    border-bottom: none; /* Remove border for last item */
+}
+
+nav ul li .dropdown-content li a {
+    color: black;
+    text-decoration: none;
+    display: block;
+}
+
+nav ul li .dropdown-content li a:hover {
+    background-color: #f1f1f1; /* Optional: change background on hover */
+}
+
+nav ul li.dropdown:hover .dropdown-content {
+    display: block; /* Show the dropdown when hovered */
+}
+
+nav ul li a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px;
+    display: block;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.login-button {
+    display: flex;
+    align-items: center;
+    margin-left: auto; 
+    margin-right: 20px; 
+}
+
+.login-button a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: #e0e0e5;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+        margin-left: auto; 
+    margin-right: 20px; 
+}
+
+.login-icon {
+    width: 15px;
+    height: 17px;
+    margin-right: 5px;
+}
+
+.full-width-image img {
+    width: 100%; 
+    height: auto; 
+    display: block; 
+    margin: 0; 
+    padding: 0;
+}
+
+.image-container {
+    position: relative; 
+    width: 100%;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    object-position: top;
+}
+
+
+.card.overlay {
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background: rgba(255, 255, 255, 0.9);
+    padding: 3rem; 
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%; 
+    max-width: 600px;
+
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+.card.overlay h2 {
+    margin: 0 0 1rem;
+    font-size: 1.8rem;
+}
+
+.full-width-image {
+    width: 100%;
+    height: 450px; 
+    overflow: hidden; /
+}
+
+.full-width-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    object-position: top; 
+    display: block;
+}
+
+
+/* Footer */
+footer {
+    background-color: #768e78;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    margin: 0; 
+    font-size: 0.9rem;
+}
+
+footer p {
+    margin: 0.5rem 0;
+}
+
+/*------------------------------------------ for login page ------------------------------------------*/
+/* General Body Styles */
+body, h1, h2, h3, h4, h5, h6 {
+    font-family: "Raleway", Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+/* Hero Banner */
+.hero {
+    background-image: url('./images/login-banner.jpg'); /* Use your image path */
+    background-size: cover;
+    background-position: center;
+    height: 70vh; /* Increase the height of the image */
+    color: white;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative; /* Allow overlay if needed */
+    padding: 20px; /* Add padding to prevent content overlap */
+}
+
+/* Background container for blur */
+.hero .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./images/hawaiihall.jpg'); /* Background image path */
+    background-size: cover;
+    background-position: center;
+    filter: blur(15px); 
+    z-index: 1; /* Place it behind the content */
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+
+/* Form container above the blur */
+.hero .unique-form-container {
+    position: relative; /* Ensure it sits above the background */
+    z-index: 2; 
+    background: white; 
+    padding: 20px; 
+    border-radius: 8px; 
+    max-width: 500px;
+    width: 100%; /* Ensure responsiveness */
+    text-align: left; /* Align content to the left */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    color: #333; /* Dark text color for contrast */
+}
+/* Input Fields */
+input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+/* Error Message */
+#error_message {
+    color: #ff9999;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+
+/* Register Link */
+.niceLink {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    color: #0077b6;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.niceLink:hover {
+    color: #0056b3;
+}
+
+/* Librarian Login Section */
+.librarian-login-section {
+    margin-top: 20px; /* Space above the section */
+    text-align: center; /* Center-align the content */
+    font-size: 0.9rem; /* Slightly smaller font size */
+    font-family: "Raleway", Arial, Helvetica, sans-serif; /* Match the default font */
+}
+
+.librarian-login-section a {
+    text-decoration: none; /* Remove underline from the link */
+    color: #0077b6; /* Use a professional blue */
+    font-weight: bold; /* Emphasize the link */
+    padding: 5px 10px; /* Add padding for better click area */
+    border-radius: 4px; /* Rounded edges */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition effects */
+}
+
+.librarian-login-section a:hover {
+    color: white; /* Change text color on hover */
+    background-color: #0077b6; /* Add blue background on hover */
+}
+
+.branding {
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+}
+
+.branding img.emsync-logo {
+    height: 140px;
+    width: auto; 
+}
+
+.branding .text-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; 
+}
+
+.branding .text-container h1 {
+    margin: 0; /* Remove default margin */
+    font-size: 3rem; 
+    color: black;
+}
+
+.branding .text-container p {
+    margin: 0; /* Remove default margin */
+    margin-top: -3px; /* Add slight overlap or closeness */
+    font-size: 1rem; 
+    color: gray;
+}
+
+.branding h1 {
+    margin: 0;
+    font-size: 2rem; 
+    color: black; 
+}
+
+.branding p {
+    margin: 0;
+    font-size: 1rem; 
+    color: gray; 
+}
 
 header .branding h1 {
     margin: 0;
@@ -95,15 +481,13 @@ nav ul li a:hover {
     background-color: #e0e0e5;
     border-radius: 3px;
     transition: background-color 0.3s;
-}
-
-.login-button a:hover {
-    background-color: #4CAF50;
+        margin-left: auto; 
+    margin-right: 20px; 
 }
 
 .login-icon {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 17px;
     margin-right: 5px;
 }
 
@@ -139,7 +523,7 @@ nav ul li a:hover {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 80%; 
+    width: 90%; 
     max-width: 600px;
 
     display: flex; 
@@ -167,13 +551,10 @@ nav ul li a:hover {
     display: block;
 }
 
-main {
-    padding: 2rem;
-}
 
 /* Footer */
 footer {
-    background-color: #4CAF70;
+    background-color: #768e78;
     color: white;
     text-align: center;
     padding: 1rem 0;
@@ -208,6 +589,20 @@ body, h1, h2, h3, h4, h5, h6 {
     padding: 20px; /* Add padding to prevent content overlap */
 }
 
+/* Background container for blur */
+.hero .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./images/hawaiihall.jpg'); /* Background image path */
+    background-size: cover;
+    background-position: center;
+    filter: blur(15px); 
+    z-index: 1; /* Place it behind the content */
+}
+
 .hero h1 {
     font-size: 3rem;
     font-weight: bold;
@@ -215,24 +610,20 @@ body, h1, h2, h3, h4, h5, h6 {
     margin-bottom: 20px; /* Space below the heading */
 }
 
+
+/* Form container above the blur */
 .hero .unique-form-container {
-    background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
-    padding: 20px; /* Padding for spacing */
-    border-radius: 8px; /* Smooth, rounded corners */
-    max-width: 400px; /* Limit the form width */
+    position: relative; /* Ensure it sits above the background */
+    z-index: 2; 
+    background: white; 
+    padding: 20px; 
+    border-radius: 8px; 
+    max-width: 500px;
     width: 100%; /* Ensure responsiveness */
     text-align: left; /* Align content to the left */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
     color: #333; /* Dark text color for contrast */
 }
-
-.hero .unique-form-container h2 {
-    text-align: center; /* Center the heading */
-    font-size: 1.5rem; /* Font size for the heading */
-    margin-bottom: 15px; /* Space below the heading */
-    color: #333; /* Match the text color */
-}
-
 /* Input Fields */
 input[type="email"], input[type="password"] {
     width: 100%;
@@ -251,22 +642,6 @@ input[type="email"], input[type="password"] {
     margin-bottom: 15px;
 }
 
-/* Button Styles */
-.niceButton {
-    width: 100%;
-    padding: 10px 20px;
-    background-color: #0077b6;
-    color: white;
-    font-size: 1rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.niceButton:hover {
-    background-color: #0056b3;
-}
 
 /* Register Link */
 .niceLink {
