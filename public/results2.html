@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query Results</title>
+    <style>
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Query Results</h1>
+    <table id="resultsTable">
+        <thead>
+            <tr id="headerRow"></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('/getAdhocResults')
+                .then(response => response.json())
+                .then(data => {
+                    const tableHeader = document.getElementById('headerRow');
+                    const tableBody = document.querySelector('#resultsTable tbody');
+
+                    if (data.length === 0) {
+                        document.body.innerHTML += '<p style="text-align: center;">No results found.</p>';
+                        return;
+                    }
+
+                    // Generate table headers dynamically
+                    const columns = Object.keys(data[0]);
+                    columns.forEach(col => {
+                        const th = document.createElement('th');
+                        th.textContent = col;
+                        tableHeader.appendChild(th);
+                    });
+
+                    // Generate table rows dynamically
+                    data.forEach(row => {
+                        const tr = document.createElement('tr');
+                        columns.forEach(col => {
+                            const td = document.createElement('td');
+                            td.textContent = row[col] !== null ? row[col] : '';
+                            tr.appendChild(td);
+                        });
+                        tableBody.appendChild(tr);
+                    });
+                })
+                .catch(err => console.error('Error fetching results:', err));
+        });
+    </script>
+</body>
+</html>

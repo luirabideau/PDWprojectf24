@@ -274,6 +274,8 @@ app.post("/executeSearch", (req, res) => {
 
 
 /*---------------------------------- ADHOC SQL ----------------------------------*/
+let queryResults = []; // Declare a global variable properly
+
 // Endpoint to handle form submissions
 app.post('/adhoc', (req, res) => {
   const query = req.body.query; // Extract "query" from the form input
@@ -285,13 +287,16 @@ app.post('/adhoc', (req, res) => {
       return res.status(500).send('Error executing query.');
     }
 
-    // Send query results as response
-    res.send({
-      message: 'Query executed successfully.',
-      results: results,
-    });
+    queryResults = results; // Store results for the results2.html page
+    res.redirect('/results2.html'); // Redirect to the results page AFTER results are ready
   });
 });
+
+// Endpoint to retrieve query results
+app.get('/getAdhocResults', (req, res) => {
+  res.json(queryResults || []); // Send stored query results
+});
+
 
 
 /*----------------------------------- ROUTING -----------------------------------*/
