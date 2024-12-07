@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMSync2</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./functions.js"></script>
+</head>
+<body>
+    <!------------------------------------ Navigation Bar & Header ------------------------------------>
+   <script>navBar2();</script>
+    <!------------------------------------ Navigation Bar & Header end ------------------------------------>
+
+    <!-- Full-Width Image with Overlay -->
+<div class="image-container">
+    <img src="./images/hawaiihall.jpg" alt="Hawaii Hall">
+    <section id="quick-search" class="card overlay">
+        <h2>EmSync Logo</h2>
+        </form>
+    </section>
+</div>
+
+    <!-- Main Content -->
+    <main>
+        <h1>Retrieve Employee Information</h1>
+        <form method="POST" action="./retrieveInfo">
+            <label for="tableSelect">Select Table:</label>
+            <select name="table" id="tableSelect" required>
+                <option value="applicant">Applicant</option>
+                <option value="bank_account">Bank Account</option>
+                <option value="employee">Employee</option>
+                <option value="evaluation">Evaluation</option>
+                <option value="grievance">Grievance</option>
+                <option value="health_insurance_provider">Health Insurance Provider</option>
+                <option value="retirement_benefits_provider">Retirement Benefits Provider</option>
+                <option value="timesheets">Timesheets</option>
+                <option value="training">Training</option>
+            </select>
+            <br><br>
+            <label for="employeeID">Employee Number:</label>
+            <input type="text" name="employeeID" id="employeeID" required>
+            <br><br>
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Precision Dataworks. All rights reserved.</p>
+        <p>Contact support: support@precisiondataworks.com</p>
+    </footer>
+</body>
+</html>

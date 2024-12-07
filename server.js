@@ -206,6 +206,44 @@ app.get('/retrievePayroll', (req, res) => {
   });
 });
 
+/*---------------------------------- INFO STUFF ----------------------------------*/
+
+// POST endpoint to handle form submission
+app.post('/retrieveInfo', (req, res) => {
+  const { table, employeeID } = req.body;
+
+  // Validate inputs
+  if (!table || !employeeID) {
+      return res.status(400).send('Table and Employee ID are required.');
+  }
+
+  // Store the query results for the frontend
+  const query = `SELECT * FROM ${table} WHERE Employee_ID = ?`;
+
+  con.query(query, [employeeID], (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          return res.status(500).send('Database query failed.');
+      }
+
+      // Save query results in a global variable (use sessions or a database for production)
+      app.locals.queryResults = results;
+
+      // Redirect to results.html
+      res.redirect('/results.html');
+  });
+});
+
+// Endpoint to provide query results
+app.get('/getResults', (req, res) => {
+  res.json(app.locals.queryResults || []);
+});
+
+// Serve results.html
+app.get('/results.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'results.html'));
+});
+
 /*---------------------------------- SEARCH SQL ----------------------------------*/
 app.post("/executeSearch", (req, res) => {
   const search = req.body.searchInput;
