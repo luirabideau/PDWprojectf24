@@ -50,7 +50,7 @@ var con = mysql.createConnection({// Actual DB connection occurs here
   host: '127.0.0.1',
   user: "root",
   port: 3306,
-  database: "travel",
+  database: "emsync",
   password: ""
 });
 
@@ -195,8 +195,8 @@ app.get("/get-session-data", (req, res) => {
 /*---------------------------------- PAYROLL STUFF ----------------------------------*/
 // Route to retrieve payroll data
 app.get('/retrievePayroll', (req, res) => {
-  const query = `SELECT * FROM timesheets WHERE = '1000123456'`;
-  db.query(query, (err, results) => {
+  const query = `SELECT * FROM timesheets WHERE Employee_ID = '1000123456'`;
+  con.query(query, (err, results) => {
       if (err) {
           console.error('Error executing query:', err);
           res.status(500).json({ error: 'Failed to fetch payroll data' });
