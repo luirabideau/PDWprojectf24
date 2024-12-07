@@ -271,6 +271,29 @@ app.post("/executeSearch", (req, res) => {
     res.redirect(`/results.html?search=${encodeURIComponent(search)}&page=${page}`);
   });
 });
+
+
+/*---------------------------------- ADHOC SQL ----------------------------------*/
+// Endpoint to handle form submissions
+app.post('/adhoc', (req, res) => {
+  const query = req.body.query; // Extract "query" from the form input
+
+  // Execute the query
+  con.query(query, (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      return res.status(500).send('Error executing query.');
+    }
+
+    // Send query results as response
+    res.send({
+      message: 'Query executed successfully.',
+      results: results,
+    });
+  });
+});
+
+
 /*----------------------------------- ROUTING -----------------------------------*/
 app.all('*', function (request, response, next) {// This must be at the end!
   console.log(request.method + ' to ' + request.path);

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Geo Reports</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./css/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="./functions.js"></script>
+    <style>
+        body {
+            font-family: "Raleway", Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #0077b6;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .table-container {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 1000px;
+        }
+
+        .results-info {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .record-group {
+            margin-bottom: 20px; /* Spacing between records */
+            padding: 10px;
+            border: 1px solid #ddd; /* Optional border for clarity */
+            border-radius: 6px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow underneath each record */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px;
+        }
+
+        tr.header-row {
+            background-color: #0077b6;
+            color: white;
+            font-weight: bold;
+            border-radius: 6px 6px 0 0;
+        }
+
+        tr.header-row td {
+            font-size: 1.2rem;
+            text-align: left;
+            padding: 14px;
+        }
+
+        tr.details-row {
+            background-color: white;
+        }
+
+        tr.details-row:hover {
+            background-color: #f9f9f9;
+        }
+
+        tr.description-row {
+            background-color: #fefefe;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 20px;
+            color: #555;
+        }
+
+        button {
+            display: inline-block;
+            background-color: #0077b6;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #005fa3;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+<!-- Navigation Bar -->
+<script>navBar();</script>
+
+    <main>
+        <div class="table-container">
+            <h2 id="location-title">Loading...</h2>
+            <div class="results-info" id="results-info"></div>
+            <div id="results-container">
+                <!-- Records will be dynamically inserted here -->
+            </div>
+            <div class="no-results" id="no-results" style="display: none;">
+                No records found for this search.
+            </div>
+            <button id="next-page" style="display: none;">Next Page</button>
+        </div>
+    </main>
+    <script>
+        // Function to fetch session data
+        async function fetchSessionData() {
+            try {
+                const response = await fetch('/get-session-data');
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch session data.');
+                }
+
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching session data:', error);
+                return null;
+            }
+        }
+
+        // Function to populate the table
+        async function populateRecords() {
+            const data = await fetchSessionData();
+
+            const resultsContainer = document.getElementById("results-container");
+            const noResultsDiv = document.getElementById("no-results");
+            const nextPageButton = document.getElementById("next-page");
+            const resultsInfo = document.getElementById("results-info");
+
+            // Update the page title
+            document.getElementById("location-title").textContent = `Results for '${data.search}'`;
+
+            // Clear the results container
+            resultsContainer.innerHTML = "";
+
+            if (data.results && data.results.length > 0) {
+                // Display the number of results
+                resultsInfo.textContent = `Showing ${data.results.length} result(s).`;
+
+                data.results.forEach(record => {
+                    // Create record group container
+                    const recordGroup = document.createElement("div");
+                    recordGroup.classList.add("record-group");
+
+                    // Add Title row
+                    const titleRow = `
+                        <table>
+                            <tr class="header-row">
+                                <td colspan="2">${record.Title}</td>
+                            </tr>
+                            <tr class="details-row">
+                                <td><strong>Department:</strong> ${record.Department_Name}</td>
+                                <td><strong>Year Range:</strong> ${record.Year_Range}</td>
+                            </tr>
+                            <tr class="details-row">
+                                <td><strong>Subject:</strong> ${record.Subject}</td>
+                                <td><strong>Medium:</strong> ${record.Medium}</td>
+                            </tr>
+                            <tr class="details-row">
+                                <td colspan="2"><strong>Language:</strong> ${record.Language}</td>
+                            </tr>
+                            <tr class="description-row">
+                                <td colspan="2"><em>${record.Description}</em></td>
+                            </tr>
+                        </table>
+                    `;
+                    recordGroup.innerHTML += titleRow;
+
+                    // Append to results container
+                    resultsContainer.appendChild(recordGroup);
+                });
+
+                noResultsDiv.style.display = "none";
+                nextPageButton.style.display = "block";
+            } else {
+                // Update results info to indicate no results
+                resultsInfo.textContent = "";
+                noResultsDiv.style.display = "block";
+                nextPageButton.style.display = "none";
+            }
+        }
+
+        // Load the records data on page load
+        populateRecords();
+    </script>
+</body>
+</html>
