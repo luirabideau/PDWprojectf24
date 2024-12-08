@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMSync2</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./functions.js"></script>
+
+    <style>
+        table {
+            width: 60%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+
+
+
+</head>
+<body>
+    <!------------------------------------ Navigation Bar & Header ------------------------------------>
+   <script>navBar1();</script>
+    <!------------------------------------ Navigation Bar & Header end ------------------------------------>
+
+    <!-- Full-Width Image with Overlay -->
+ <!--<div class="image-container">
+    <img src="./images/hawaiihall.jpg" alt="Hawaii Hall">
+    <section id="quick-search" class="card overlay">
+        <h2>EmSync Logo</h2>
+        </form>
+    </section>
+</div> -->
+
+    <!-- Main Content -->
+    <main>
+
+
+        <h1 style="text-align: center;">Averge Salary per Department</h1>
+        <table id="avgsalarydeptTable">
+            <thead>
+                <tr>
+                    <th>Department</th>
+                    <th>Avg Salary</th>
+                    <th>Min Salary</th>
+                    <th>Max Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+
+        <h1 style="text-align: center;">Averge Salary per Job Type</h1>
+        <table id="avgsalaryjobtypeTable">
+            <thead>
+                <tr>
+                    <th>Job Type</th>
+                    <th>Employee Count</th>
+                    <th>Avg Salary</th>
+                    <th>Min Salary</th>
+                    <th>Max Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+
+        <h1 style="text-align: center;">Averge Salary per Job Type per Department</h1>
+        <table id="avgsalaryjobtypedeptTable">
+            <thead>
+                <tr>
+                    <th>Department</th>
+                    <th>Job Type</th>
+                    <th>Avg Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+
+        <h1 style="text-align: center;">Averge Salary by Gender</h1>
+        <table id="avgsalaryjobtypedeptTable">
+            <thead>
+                <tr>
+                    <th>Gender</th>
+                    <th>Avg Salary</th>
+                    <th>Min Salary</th>
+                    <th>Max Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+
+        <h1 style="text-align: center;">Top 10 Paid Employees</h1>
+        <table id="top10salaryTable">
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Department</th>
+                    <th>Job Type</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+
+        <h1 style="text-align: center;">Average Raise per Department</h1>
+        <table id="avgraisedeptTable">
+            <thead>
+                <tr>
+                    <th>Department</th>
+                    <th>Avg Raise</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+
+
+
+        
+
+        
+        
+        <!-- Q1 script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrieveAvgsalarydept')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('avgsalarydeptTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.Dept_Hire}</td>
+                                <td>$${row.average_salary}</td>
+                                <td>$${row.min_salary}</td>
+                                <td>$${row.max_salary}</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching avgsalarydept data:', error));
+            });
+        </script>
+
+        <!-- Q2 script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrieveAvgsalaryjobtype')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('avgsalaryjobtypeTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.Employee_Type_Name}</td>
+                                <td>${row.employee_count}</td>
+                                <td>$${row.average_salary}</td>
+                                <td>$${row.min_salary}</td>
+                                <td>$${row.max_salary}</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching avgsalaryjobtype data:', error));
+            });
+        </script>
+
+        <!-- Q3 script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrieveAvgsalaryjobtypedept')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('avgsalaryjobtypedeptTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.Dept_Hire}</td>
+                                <td>${row.Employee_Type_Name}</td>
+                                <td>$${row.average_salary}</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching avgsalaryjobtypedept data:', error));
+            });
+        </script>
+
+        <!-- Q4 script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrieveAvgsalarygender')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('avgsalarygenderTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.gender}</td>
+                                <td>$${row.average_salary}</td>
+                                <td>$${row.min_salary}</td>
+                                <td>$${row.max_salary}</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching avgsalarygender data:', error));
+            });
+        </script>
+
+        <!-- Q5 script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrieveTop10salary')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('top10salaryTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.Employee_ID}</td>
+                                <td>${row.FName}</td>
+                                <td>${row.LName}</td>
+                                <td>${row.Dept_Hire}</td>
+                                <td>${row.Employee_Type_Name}</td>
+                                <td>$${row.salary}</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching top10salary data:', error));
+            });
+        </script>
+
+        <!-- Q6 script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrieveAvgraisedept')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('avgraisedeptTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.Dept_Hire}</td>
+                                <td>$${row.average_raise}</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching avgraisedept data:', error));
+            });
+        </script>
+
+        
+
+
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Precision Dataworks. All rights reserved.</p>
+        <p>Contact support: support@precisiondataworks.com</p>
+    </footer>
+</body>
+</html>

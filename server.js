@@ -462,6 +462,92 @@ app.get('/retrieveTermgrievance', (req, res) => {
 
 
 
+// Salary; Q1
+app.get('/retrieveAvgsalarydept', (req, res) => {
+  const query = `SELECT Dept_Hire, ROUND(AVG(Salary), 2) AS average_salary, ROUND(MIN(Salary), 2) AS min_salary, ROUND(MAX(Salary), 2) AS max_salary FROM employee WHERE Term_Date IS NULL GROUP BY Dept_Hire ORDER BY average_salary DESC;
+                `;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch avgsalarydept data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+
+// Salary; Q2
+app.get('/retrieveAvgsalaryjobtype', (req, res) => {
+  const query = `SELECT Employee_Type_Name, COUNT(*) AS employee_count, ROUND(AVG(Salary), 2) AS average_salary, ROUND(MIN(Salary), 2) AS min_salary, ROUND(MAX(Salary), 2) AS max_salary FROM employee WHERE Term_Date IS NULL GROUP BY Employee_Type_Name ORDER BY average_salary DESC;
+                `;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch avgsalaryjobtype data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+// Salary; Q3
+app.get('/retrieveAvgsalaryjobtypedept', (req, res) => {
+  const query = `WITH department_job_types AS ( SELECT d.Dept_Hire, t.Employee_Type_Name FROM (SELECT DISTINCT Dept_Hire FROM employee) d CROSS JOIN (SELECT DISTINCT Employee_Type_Name FROM employee) t ) SELECT dj.Dept_Hire, dj.Employee_Type_Name, ROUND(IFNULL(AVG(e.Salary), 0), 2) AS average_salary, ROUND(IFNULL(MIN(e.Salary), 0), 2) AS min_salary, ROUND(IFNULL(MAX(e.Salary), 0), 2) AS max_salary FROM department_job_types dj LEFT JOIN employee e ON dj.Dept_Hire = e.Dept_Hire AND dj.Employee_Type_Name = e.Employee_Type_Name AND e.Term_Date IS NULL GROUP BY dj.Dept_Hire, dj.Employee_Type_Name ORDER BY dj.Dept_Hire, FIELD(dj.Employee_Type_Name, 'CASUAL', 'GA', 'AsstProf', 'Prof') DESC;
+                `;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch avgsalaryjobtypedept data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+// Salary; Q4
+app.get('/retrieveAvgsalarygender', (req, res) => {
+  const query = `SELECT gender, ROUND(AVG(Salary), 2) AS average_salary, ROUND(MIN(Salary), 2) AS min_salary, ROUND(MAX(Salary), 2) AS max_salary FROM employee WHERE Term_Date IS NULL GROUP BY gender ORDER BY average_salary DESC;
+                `;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch avgsalarygender data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+// Salary; Q5
+app.get('/retrieveTop10salary', (req, res) => {
+  const query = `SELECT e.Employee_ID, e.FName, e.LName, e.Dept_Hire, e.Employee_Type_Name, ROUND(e.Salary, 2) AS salary FROM employee e WHERE e.Term_Date IS NULL ORDER BY e.Salary DESC LIMIT 10;
+                `;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch top10salary data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+// Salary; Q6
+app.get('/retrieveAvgraisedept', (req, res) => {
+  const query = `SELECT e.Dept_Hire, ROUND(AVG(e.Salary - et.Starting_Salary), 2) AS average_raise FROM employee e JOIN Employee_Type et ON e.Employee_Type_Name = et.Type_Name GROUP BY e.Dept_Hire ORDER BY average_raise DESC;
+                `;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch avgraisedept data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+
 /*---------------------------------- REPORTS STUFF END ----------------------------------*/
 
 
