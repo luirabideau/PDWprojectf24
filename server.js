@@ -206,6 +206,269 @@ app.get('/retrievePayroll', (req, res) => {
   });
 });
 
+/*---------------------------------- GRIEVANCES STUFF ----------------------------------*/
+// Route to retrieve grievances data
+app.get('/retrieveGrievances', (req, res) => {
+  const query = `SELECT * FROM grievance WHERE Employee_ID = '1000123456'`;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch grievance data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+/*---------------------------------- EVALUATION STUFF ----------------------------------*/
+// Route to retrieve evaluation data
+app.get('/retrieveEvaluation', (req, res) => {
+  const query = `SELECT * FROM evaluation WHERE Employee_ID = '1000123456'`;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch evalution data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+
+/*---------------------------------- UPCOMING TRAINING STUFF ----------------------------------*/
+// Route to retrieve training data
+app.get('/retrieveUpcomingtraining', (req, res) => {
+  const query = `SELECT * FROM training WHERE Training_date > CURDATE();`;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch training data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+
+/*---------------------------------- PAST TRAINING STUFF ----------------------------------*/
+// Route to retrieve training data
+app.get('/retrievePasttraining', (req, res) => {
+  const query = `SELECT * FROM training WHERE Training_date < CURDATE();`;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch training data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+
+
+
+
+/*---------------------------------- REPORTS STUFF START ----------------------------------*/
+
+
+// Demographic; Q1
+app.get('/retrieveGenderratio', (req, res) => {
+  const query = `SELECT gender,
+                COUNT(*) AS count,
+                ROUND((COUNT(*) / (SELECT COUNT(*) FROM employee) * 100), 2) AS percentage
+                FROM employee
+                WHERE Term_Date IS NULL
+                GROUP BY gender;
+                `;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch genderratio data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+// Demographic; Q2
+app.get('/retrieveGenderratiodept', (req, res) => {
+  const query = `SELECT Dept_Hire, gender, COUNT(*) AS count, ROUND((COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY Dept_Hire) * 100), 2) AS percentage FROM employee WHERE Term_Date IS NULL GROUP BY Dept_Hire, gender ORDER BY Dept_Hire, gender;
+                `;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch genderratiodept data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+// Demographic; Q3
+app.get('/retrieveAgegroup', (req, res) => {
+  const query = `SELECT CASE WHEN TIMESTAMPDIFF(YEAR, BDate, CURDATE()) BETWEEN 21 AND 35 THEN '21-35' WHEN TIMESTAMPDIFF(YEAR, BDate, CURDATE()) BETWEEN 36 AND 59 THEN '36-59' WHEN TIMESTAMPDIFF(YEAR, BDate, CURDATE()) >= 60 THEN '60+' END AS age_range, COUNT(*) AS count FROM employee WHERE Term_Date IS NULL GROUP BY age_range ORDER BY age_range;
+                `;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch agegroup data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+// Demographic; Q4
+app.get('/retrieveAgegroupdept', (req, res) => {
+  const query = `SELECT e.Dept_Hire, CASE WHEN TIMESTAMPDIFF(YEAR, e.BDate, CURDATE()) BETWEEN 21 AND 35 THEN '21-35' WHEN TIMESTAMPDIFF(YEAR, e.BDate, CURDATE()) BETWEEN 36 AND 59 THEN '36-59' WHEN TIMESTAMPDIFF(YEAR, e.BDate, CURDATE()) >= 60 THEN '60+' END AS age_range, COUNT(*) AS count FROM employee e WHERE Term_Date IS NULL GROUP BY e.Dept_Hire, age_range ORDER BY e.Dept_Hire, age_range;
+                `;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch agegroupdept data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+// Demographic; Q5
+app.get('/retrieveJobtype', (req, res) => {
+  const query = `SELECT Employee_Type_Name, COUNT(*) AS count FROM employee WHERE Term_Date IS NULL GROUP BY Employee_Type_Name ORDER BY count DESC;
+                `;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch jobtype data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+// Demographic; Q6
+app.get('/retrieveJobtypedept', (req, res) => {
+  const query = `WITH department_job_types AS ( SELECT d.Dept_Hire, t.Employee_Type_Name FROM (SELECT DISTINCT Dept_Hire FROM employee) d CROSS JOIN (SELECT DISTINCT Employee_Type_Name FROM employee) t ) SELECT dj.Dept_Hire, dj.Employee_Type_Name, COUNT(e.Employee_ID) AS count FROM department_job_types dj LEFT JOIN employee e ON dj.Dept_Hire = e.Dept_Hire AND dj.Employee_Type_Name = e.Employee_Type_Name AND e.Term_Date IS NULL GROUP BY dj.Dept_Hire, dj.Employee_Type_Name ORDER BY dj.Dept_Hire ASC, dj.Employee_Type_Name ASC;
+                `;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch jobtypedept data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+
+
+// Turnover; Q1
+app.get('/retrieveRetentiondept', (req, res) => {
+  const query = `SELECT Dept_Hire, AVG(TIMESTAMPDIFF(MONTH, Hire_Date, Term_Date)) AS average_retention_months FROM employee WHERE Term_Date IS NOT NULL GROUP BY Dept_Hire ORDER BY average_retention_months DESC;
+                `;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch retentiondept data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+// Turnover; Q2
+app.get('/retrieveRetentionjobtype', (req, res) => {
+  const query = `SELECT Employee_Type_Name, AVG(TIMESTAMPDIFF(MONTH, Hire_Date, Term_Date)) AS average_retention_months FROM employee WHERE Term_Date IS NOT NULL GROUP BY Employee_Type_Name ORDER BY average_retention_months DESC;
+                `;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch retentionjobtype data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+// Turnover; Q3
+app.get('/retrieveRetentionjobtypedept', (req, res) => {
+  const query = `SELECT Dept_Hire, Employee_Type_Name, AVG(TIMESTAMPDIFF(MONTH, Hire_Date, Term_Date)) AS average_retention_months FROM employee WHERE Term_Date IS NOT NULL GROUP BY Dept_Hire, Employee_Type_Name ORDER BY Dept_Hire, average_retention_months DESC;
+                `;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch retentionjobtypedept data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+// Turnover; Q4
+app.get('/retrieveTermjobtype', (req, res) => {
+  const query = `SELECT t.Term_Type, COUNT(e.Term_Type) AS terminated_count FROM (SELECT DISTINCT Term_Type FROM employee WHERE Term_Type IS NOT NULL UNION SELECT 'end_of_contract' UNION SELECT 'Retirement' UNION SELECT 'Resignation' UNION SELECT 'poor_evaluation') t LEFT JOIN employee e ON t.Term_Type = e.Term_Type WHERE e.Term_Type IS NOT NULL OR e.Term_Type IS NULL GROUP BY t.Term_Type ORDER BY terminated_count DESC;
+                `;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch termjobtype data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+// Turnover; Q5
+app.get('/retrieveTermjobtypedept', (req, res) => {
+  const query = `SELECT d.Dept_Hire, t.Term_Type, COUNT(e.Term_Type) AS terminated_count FROM (SELECT DISTINCT Dept_Hire FROM employee) d CROSS JOIN (SELECT DISTINCT Term_Type FROM employee WHERE Term_Type IS NOT NULL) t LEFT JOIN employee e ON d.Dept_Hire = e.Dept_Hire AND t.Term_Type = e.Term_Type WHERE e.Term_Type IS NOT NULL OR e.Term_Type IS NULL GROUP BY d.Dept_Hire, t.Term_Type ORDER BY d.Dept_Hire, terminated_count DESC;
+                `;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch termjobtypedept data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+// Turnover; Q6
+app.get('/retrieveTermrate6mo', (req, res) => {
+  const query = `WITH last_six_months AS ( SELECT DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL n.num MONTH), '%Y-%m') AS term_month FROM (SELECT 0 AS num UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5) n ) SELECT m.term_month, COUNT(e.Term_Date) AS terminated_count, ROUND((COUNT(e.Term_Date) / (SELECT COUNT(*) FROM employee) * 100), 2) AS termination_rate_percentage FROM last_six_months m LEFT JOIN employee e ON DATE_FORMAT(e.Term_Date, '%Y-%m') = m.term_month WHERE e.Term_Date IS NULL OR e.Term_Date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH) GROUP BY m.term_month ORDER BY m.term_month ASC;
+                `;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch termrate6mo data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+// Turnover; Q7
+app.get('/retrieveTermgrievance', (req, res) => {
+  const query = `SELECT e.Employee_ID, CONCAT(e.FName, ' ', e.LName) AS Employee_Name, COUNT(g.Employee_ID) AS grievance_count FROM employee e LEFT JOIN grievance g ON e.Employee_ID = g.Employee_ID WHERE e.Term_Date IS NOT NULL GROUP BY e.Employee_ID, e.FName, e.LName ORDER BY grievance_count DESC;
+                `;
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error executing query:', err);
+          res.status(500).json({ error: 'Failed to fetch termgrievance data' });
+          return;
+      }
+      res.json(results);
+  });
+});
+
+
+
+/*---------------------------------- REPORTS STUFF END ----------------------------------*/
+
+
+
+
+
+
 /*---------------------------------- INFO STUFF ----------------------------------*/
 
 // POST endpoint to handle form submission

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMSync2</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./functions.js"></script>
+
+    <style>
+        table {
+            width: 60%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+
+
+
+</head>
+<body>
+    <!------------------------------------ Navigation Bar & Header ------------------------------------>
+   <script>navBar2();</script>
+    <!------------------------------------ Navigation Bar & Header end ------------------------------------>
+
+    <!-- Full-Width Image with Overlay -->
+ <!--<div class="image-container">
+    <img src="./images/hawaiihall.jpg" alt="Hawaii Hall">
+    <section id="quick-search" class="card overlay">
+        <h2>EmSync Logo</h2>
+        </form>
+    </section>
+</div> -->
+
+    <!-- Main Content -->
+    <main>
+
+
+        <h1 style="text-align: center;">Upcoming Training</h1>
+        <table id="upcomingtrainingTable">
+            <thead>
+                <tr>
+                    <th>Program ID</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    
+                    <th>Date</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+
+        <h1 style="text-align: center;">Past Training</h1>
+        <table id="pasttrainingTable">
+            <thead>
+                <tr>
+                    <th>Program ID</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>Certification Received</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+    
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrieveUpcomingtraining')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('upcomingtrainingTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.Program_ID}</td>
+                                <td>${row.Program_description}</td>
+                                <td>${row.Training_type}</td>
+                                
+                                <td>${row.Training_date}</td>
+                                <td>${row.Training_time}</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching training data:', error));
+            });
+        </script>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrievePasttraining')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('pasttrainingTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.Program_ID}</td>
+                                <td>${row.Program_description}</td>
+                                <td>${row.Training_type}</td>
+                                <td>${row.Certification_received}</td>
+                                <td>${row.Training_date}</td>
+                                <td>${row.Training_time}</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching training data:', error));
+            });
+        </script>
+
+
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Precision Dataworks. All rights reserved.</p>
+        <p>Contact support: support@precisiondataworks.com</p>
+    </footer>
+</body>
+</html>

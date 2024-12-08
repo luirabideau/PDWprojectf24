@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMSync2</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./functions.js"></script>
+
+    <style>
+        table {
+            width: 60%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+
+
+
+</head>
+<body>
+    <!------------------------------------ Navigation Bar & Header ------------------------------------>
+   <script>navBar1();</script>
+    <!------------------------------------ Navigation Bar & Header end ------------------------------------>
+
+    <!-- Full-Width Image with Overlay -->
+ <!--<div class="image-container">
+    <img src="./images/hawaiihall.jpg" alt="Hawaii Hall">
+    <section id="quick-search" class="card overlay">
+        <h2>EmSync Logo</h2>
+        </form>
+    </section>
+</div> -->
+
+    <!-- Main Content -->
+    <main>
+
+
+        <h1 style="text-align: center;">CALL Employee Gender Ratio</h1>
+        <table id="genderratioTable">
+            <thead>
+                <tr>
+                    <th>Gender</th>
+                    <th>Count</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+
+        <h1 style="text-align: center;">Department Employee Gender Ratio</h1>
+        <table id="genderratiodeptTable">
+            <thead>
+                <tr>
+                    <th>Department</th>
+                    <th>Gender</th>
+                    <th>Count</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+
+        <h1 style="text-align: center;">CALL Age Groups</h1>
+        <table id="agegroupTable">
+            <thead>
+                <tr>
+                    <th>Age Group</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+
+        <h1 style="text-align: center;">Department Age Groups</h1>
+        <table id="agegroupdeptTable">
+            <thead>
+                <tr>
+                    <th>Department</th>
+                    <th>Age Group</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+
+        <h1 style="text-align: center;">CALL Job Type Spread</h1>
+        <table id="jobtypeTable">
+            <thead>
+                <tr>
+                    <th>Job Type</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+
+        <h1 style="text-align: center;">Department Job Type Spread</h1>
+        <table id="jobtypedeptTable">
+            <thead>
+                <tr>
+                    <th>Department</th>
+                    <th>Job Type</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+        
+        <!-- Q1 script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrieveGenderratio')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('genderratioTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.gender}</td>
+                                <td>${row.count}</td>
+                                <td>${row.percentage}%</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching genderratio data:', error));
+            });
+        </script>
+
+        <!-- Q2 script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrieveGenderratiodept')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('genderratiodeptTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.Dept_Hire}</td>
+                                <td>${row.gender}</td>
+                                <td>${row.count}</td>
+                                <td>${row.percentage}%</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching genderratiodept data:', error));
+            });
+        </script>
+
+        <!-- Q3 script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrieveAgegroup')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('agegroupTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.age_range}</td>
+                                <td>${row.count}</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching agegroup data:', error));
+            });
+        </script>
+
+        <!-- Q4 script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrieveAgegroupdept')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('agegroupdeptTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.Dept_Hire}</td>
+                                <td>${row.age_range}</td>
+                                <td>${row.count}</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching agegroupdept data:', error));
+            });
+        </script>
+
+        <!-- Q5 script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrieveJobtype')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('jobtypeTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.Employee_Type_Name}</td>
+                                <td>${row.count}</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching jobtype data:', error));
+            });
+        </script>
+
+        <!-- Q6 script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrieveJobtypedept')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('jobtypedeptTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.Dept_Hire}</td>
+                                <td>${row.Employee_Type_Name}</td>
+                                <td>${row.count}</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching jobtypedept data:', error));
+            });
+        </script>
+
+
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Precision Dataworks. All rights reserved.</p>
+        <p>Contact support: support@precisiondataworks.com</p>
+    </footer>
+</body>
+</html>

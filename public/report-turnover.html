@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMSync2</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./functions.js"></script>
+
+    <style>
+        table {
+            width: 60%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+
+
+
+</head>
+<body>
+    <!------------------------------------ Navigation Bar & Header ------------------------------------>
+   <script>navBar1();</script>
+    <!------------------------------------ Navigation Bar & Header end ------------------------------------>
+
+    <!-- Full-Width Image with Overlay -->
+ <!--<div class="image-container">
+    <img src="./images/hawaiihall.jpg" alt="Hawaii Hall">
+    <section id="quick-search" class="card overlay">
+        <h2>EmSync Logo</h2>
+        </form>
+    </section>
+</div> -->
+
+    <!-- Main Content -->
+    <main>
+
+
+        <h1 style="text-align: center;">Averge Retention for Departments</h1>
+        <table id="retentiondeptTable">
+            <thead>
+                <tr>
+                    <th>Department</th>
+                    <th>Avg Retention</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+
+        <h1 style="text-align: center;">Average Retention by Job Type</h1>
+        <table id="retentionjobtypeTable">
+            <thead>
+                <tr>
+                    <th>Job Type</th>
+                    <th>Average Retention</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+
+        <h1 style="text-align: center;">Average Retention by Job Type for Departments</h1>
+        <table id="retentionjobtypedeptTable">
+            <thead>
+                <tr>
+                    <th>Department</th>
+                    <th>Job Type</th>
+                    <th>Average Retention</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+
+        <h1 style="text-align: center;">CALL Terminations by Job Type</h1>
+        <table id="termjobtypeTable">
+            <thead>
+                <tr>
+                    <th>Job Type</th>
+                    <th>Term Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+
+        <h1 style="text-align: center;">Department Termination by Job Type</h1>
+        <table id="termjobtypedeptTable">
+            <thead>
+                <tr>
+                    <th>Department</th>
+                    <th>Job Type</th>
+                    <th>Term Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+
+        <h1 style="text-align: center;">Termination Rate Over The Past 6 Months</h1>
+        <table id="termrate6moTable">
+            <thead>
+                <tr>
+                    <th>Month</th>
+                    <th>Term Count</th>
+                    <th>Term Rate</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+
+        <h1 style="text-align: center;">Number of Grievances Submitted by Each Employee</h1>
+        <table id="termgrievanceTable">
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Name</th>
+                    <th>Grievances</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be inserted dynamically here -->
+            </tbody>
+        </table>
+
+        
+        
+        <!-- Q1 script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrieveRetentiondept')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('retentiondeptTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.Dept_Hire}</td>
+                                <td>${row.average_retention_months} months</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching retentiondept data:', error));
+            });
+        </script>
+
+        <!-- Q2 script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrieveRetentionjobtype')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('retentionjobtypeTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.Employee_Type_Name}</td>
+                                <td>${row.average_retention_months} months</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching retentionjobtype data:', error));
+            });
+        </script>
+
+        <!-- Q3 script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrieveRetentionjobtypedept')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('retentionjobtypedeptTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.Dept_Hire}</td>
+                                <td>${row.Employee_Type_Name}</td>
+                                <td>${row.average_retention_months} months</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching retentionjobtype data:', error));
+            });
+        </script>
+
+        <!-- Q4 script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrieveTermjobtype')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('termjobtypeTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.Term_Type}</td>
+                                <td>${row.terminated_count}</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching termjobtype data:', error));
+            });
+        </script>
+
+        <!-- Q5 script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrieveTermjobtypedept')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('termjobtypedeptTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.Dept_Hire}</td>
+                                <td>${row.Term_Type}</td>
+                                <td>${row.terminated_count}</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching termjobtypedept data:', error));
+            });
+        </script>
+
+
+        
+        <!-- Q6 script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrieveTermrate6mo')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('termrate6moTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.term_month}</td>
+                                <td>${row.terminated_count}</td>
+                                <td>${row.termination_rate_percentage}</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching termrate6mo data:', error));
+            });
+        </script>
+
+        <!-- Q7 script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('/retrieveTermgrievance')
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.getElementById('termgrievanceTable').getElementsByTagName('tbody')[0];
+                        tableBody.innerHTML = ''; // Clear the table first
+                        data.forEach(row => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${row.Employee_ID}</td>
+                                <td>${row.Employee_Name}</td>
+                                <td>${row.grievance_count}</td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching termgrievance data:', error));
+            });
+        </script>
+
+
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Precision Dataworks. All rights reserved.</p>
+        <p>Contact support: support@precisiondataworks.com</p>
+    </footer>
+</body>
+</html>
