@@ -209,7 +209,7 @@ body {
   }
   
 }.contact_us_6 * {
-    font-family: Nunito, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   
   .contact_us_6 .text-blk {
@@ -262,7 +262,7 @@ body {
     width: 35%;
     padding-bottom: 10px;
     padding-left: 30px;
-    background-color: #03a9f4;
+    background-color: #116226;
     position: absolute;
     height: 950px;
     right: 0px;
@@ -288,14 +288,14 @@ body {
   }
   
   .contact_us_6 .container-block.form-wrapper {
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     max-width: 450px;
     text-align: center;
     padding-top: 50px;
     padding-right: 40px;
     padding-bottom: 50px;
     padding-left: 40px;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 4px 20px 7px;
+    box-shadow: rgba(48, 48, 48, 0.05) 0px 4px 20px 7px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
@@ -313,7 +313,7 @@ body {
   }
   
   .contact_us_6 .text-blk.contactus-subhead {
-    color: #9c9c9c;
+    color: #565555;
     width: 300px;
     margin-top: 0px;
     margin-right: auto;
@@ -347,7 +347,7 @@ body {
     border-left-style: solid;
     border-top-color: #eeeeee;
     border-right-color: #eeeeee;
-    border-bottom-color: #eeeeee;
+    border-bottom-color: #bebebe;
     border-left-color: #eeeeee;
     border-image-source: initial;
     border-image-slice: initial;
@@ -375,7 +375,7 @@ body {
     border-left-style: solid;
     border-top-color: #eeeeee;
     border-right-color: #eeeeee;
-    border-bottom-color: #eeeeee;
+    border-bottom-color: #bebebe;
     border-left-color: #eeeeee;
     border-image-source: initial;
     border-image-slice: initial;
@@ -386,10 +386,10 @@ body {
   }
   
   .contact_us_6 .submit-btn {
-    width: 98%;
-    background-color: #03a9f4;
+    width: 30%;
+    background-color: #235716cb;
     height: 60px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     color: white;
     border-top-width: 0px;
@@ -409,10 +409,11 @@ body {
     border-image-width: initial;
     border-image-outset: initial;
     border-image-repeat: initial;
-    border-top-left-radius: 40px;
-    border-top-right-radius: 40px;
-    border-bottom-right-radius: 40px;
-    border-bottom-left-radius: 40px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    margin-left: 190px;
   }
   
   .contact_us_6 .form-box {
@@ -434,11 +435,11 @@ body {
     margin-right: 0px;
     margin-bottom: 5px;
     margin-left: 0px;
-    color: #9c9c9c;
+    color: #737171;
   }
   
   .contact_us_6 ::placeholder {
-    color: #dadada;
+    color: #69957a;
   }
   
   .contact_us_6 .mob-text {
@@ -750,4 +751,3 @@ body {
       height: 45px;
     }
   }
-  

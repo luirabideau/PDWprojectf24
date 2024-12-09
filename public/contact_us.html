@@ -6,74 +6,154 @@
     <title>Contact Us</title>
     <link rel="stylesheet" href="css/contact.css">
     <link rel="stylesheet" href="css/style.css">
-
     <script src="/functions.js"></script>
-    
 </head>
-<!-- Navigation Bar -->
-<div id="navbar-container">
-    <script>
-        navBar2(); // Call the navBar2 function to generate the navbar
-    </script>
-</div>
-
-<div class="contact_us_6">
-    <div class="responsive-container-block container">
-      <form class="form-box">
-        <div class="container-block form-wrapper">
-          <div class="mob-text">
-            <p class="text-blk contactus-head" style="color: darkolivegreen;">
-                Get in Touch
-            </p>
-          </div>
-          <div class="responsive-container-block" id="i2cbk">
-            <div class="responsive-cell-block wk-tab-12 wk-mobile-12 wk-desk-12 wk-ipadp-12" id="i10mt-3">
-              <p class="text-blk input-title">
-                FIRST NAME
-              </p>
-              <input class="input" id="ijowk-3" name="FirstName" placeholder="Please enter first name...">
-            </div>
-            <div class="responsive-cell-block wk-tab-12 wk-mobile-12 wk-desk-12 wk-ipadp-12" id="ip1yp">
-              <p class="text-blk input-title">
-                EMAIL
-              </p>
-              <input class="input" id="ipmgh-3" name="Email" placeholder="Please enter email...">
-            </div>
-            <div class="responsive-cell-block wk-tab-12 wk-mobile-12 wk-desk-12 wk-ipadp-12" id="ih9wi">
-              <p class="text-blk input-title">
-                PHONE NUMBER
-              </p>
-              <input class="input" id="imgis-3" name="PhoneNumber" placeholder="Please enter phone number...">
-            </div>
-            <div class="responsive-cell-block wk-tab-12 wk-mobile-12 wk-desk-12 wk-ipadp-12" id="i634i-3">
-              <p class="text-blk input-title">
-                COMMENTS OR QUESTIONS
-              </p>
-              <textarea class="textinput" id="i5vyy-3" placeholder="Please enter query..."></textarea>
-            </div>
-          </div>
-          <button class="submit-btn" id="w-c-s-bgc_p-1-dm-id-2">
-            Submit
-          </button>
-        </div>
-      </form>
-      <div class="responsive-cell-block wk-desk-7 wk-ipadp-12 wk-tab-12 wk-mobile-12" id="i772w">
-        <p class="text-blk map-contactus-head" id="w-c-s-fc_p-1-dm-id" style="color: black;">
-            Reach out to the database design team!
-        </p>
-          <p class="text-blk map-contactus-subhead">
-            Precision Dataworks is dedicated to serving the needs of their clients. Feel free to send an inquiry.
-          </p>
-          <!-- Image -->
-          <img src="images/call_contact.jpg" alt="Contact Us" class="contact-image">
-        </div>
-          </div>
-        </div>
-      </div>
+<body>
+    <!-- Navigation Bar -->
+    <div id="navbar-container">
+        <script>
+            navBar2(); // Call the navBar2 function to generate the navbar
+        </script>
     </div>
-  </div>
 
-  <footer>
-    <p>&copy; 2024 Precision Dataworks. All rights reserved.</p>
-    <p>Contact support: support@precisiondataworks.com</p>
-</footer>
+    <!-- Contact Section with Background Overlay -->
+    <div class="contact_us_6">
+        <div class="background-overlay">
+            <div class="container form-container">
+                <!-- Contact Form -->
+                <form class="form-box">
+                    <div class="form-wrapper">
+                        <p class="text-blk contactus-head" style="color: darkolivegreen;">
+                            Get in Touch
+                        </p>
+                        <p>Precision Dataworks is dedicated to serving the needs of their clients. Feel free to send an inquiry.</p>
+<p></p>
+
+                        <div class="form-group">
+                            <label for="fullName" class="input-title">FULL NAME</label>
+                            <input type="text" id="fullName" name="FirstName" placeholder="Please enter your name.">
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="input-title">EMAIL</label>
+                            <input type="email" id="email" name="Email" placeholder="Please enter your email.">
+                        </div>
+                        <div class="form-group">
+                            <label for="comments" class="input-title">COMMENTS OR QUESTIONS</label>
+                            <textarea id="comments" name="Comments" placeholder="Please enter your inquiry."></textarea>
+                        </div>
+
+                        <button class="submit-btn" type="submit">Submit</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Precision Dataworks. All rights reserved.</p>
+        <p>Contact support: support@precisiondataworks.com</p>
+    </footer>
+
+</body>
+</html>
+
+<style>
+    /* Full-screen background image with overlay */
+    .contact_us_6 {
+        position: relative;
+        background-image: url('images/call_contact.jpg');
+        background-size: cover;
+        background-position: center;
+        height: 110vh;
+        width: 100%;
+    }
+
+    /* Dark overlay over the background image */
+    .background-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.215); /* Dark overlay */
+        z-index: 0;
+    }
+
+    /* Centering the contact form and information */
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 110vh;
+        z-index: 1;
+    }
+
+    /* Contact form box with light background */
+    .form-box {
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        padding: 30px;
+        width: 600px; /* Adjusted width */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Form input and textarea styling */
+    .input-title {
+        font-size: 1rem;
+        margin-bottom: 3px;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    textarea {
+        height: 100px;
+    }
+
+    /* Submit button styling */
+    .submit-btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 50%;
+    }
+
+    .submit-btn:hover {
+        background-color: #3d7140;
+    }
+
+    /* Contact information */
+    .contact-info {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .contact-image {
+        max-width: 100%;
+        height: auto;
+        width: 90%;
+        margin-top: 20px;
+        border-radius: 10px;
+    }
+
+    footer {
+        text-align: center;
+        padding: 10px;
+        background-color: #768e78;
+        color: white;
+    }
+</style>

@@ -461,7 +461,6 @@ app.get('/retrieveTermgrievance', (req, res) => {
 });
 
 
-
 // Salary; Q1
 app.get('/retrieveAvgsalarydept', (req, res) => {
   const query = `SELECT Dept_Hire, ROUND(AVG(Salary), 2) AS average_salary, ROUND(MIN(Salary), 2) AS min_salary, ROUND(MAX(Salary), 2) AS max_salary FROM employee WHERE Term_Date IS NULL GROUP BY Dept_Hire ORDER BY average_salary DESC;
@@ -546,6 +545,7 @@ app.get('/retrieveAvgraisedept', (req, res) => {
       res.json(results);
   });
 });
+
 
 
 /*---------------------------------- REPORTS STUFF END ----------------------------------*/
@@ -646,6 +646,144 @@ app.get('/getAdhocResults', (req, res) => {
   res.json(queryResults || []); // Send stored query results
 });
 
+/* ----- POST ROUTE TO ADD NEW EMPLOYEE RECORD ------*/
+app.post('/add-user', (req, res) => {
+  const { FName, LName, gender, address, BDate, Salary, SSN, Employee_Type_name, Dept_Hire, Dept_Term, Hire_Date, Term_Date, Term_type, R_Provider_ID, H_Provider_ID } = req.body;
+
+// Convert empty date strings to NULL
+const Termdate = Term_Date === '' ? null : Term_Date;
+
+  const sql = `INSERT INTO employee (FName, LName, gender, Address, BDate, Salary, SSN, Employee_Type_name, Dept_hire, Dept_Term, Hire_Date, Term_Date, Term_type, R_Provider_ID, H_Provider_ID) 
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+
+  const values = [FName, LName, gender, address, BDate, Salary, SSN, Employee_Type_name, Dept_Hire, Dept_Term, Hire_Date, Termdate, Term_type, R_Provider_ID, H_Provider_ID];
+
+  con.query(sql, values, (err, result) => {
+      if (err) {
+          console.error('Error inserting data: ', err);
+          return res.status(500).json({ success: false, message: 'Failed to insert data.' });
+      }
+      // Redirect to edit_DB_output.html with a success message
+      res.redirect(`/edit_DB_output.html?message=New%20record%20created%20successfully`);
+  });
+});
+
+/* DOESN'T WORK - FOR EDITING EXISTING RECORDS [keeping it just in case]
+// Add route to update employee information
+app.put('/api/update-employee', (req, res) => {
+  const { 
+    FName, LName, gender, address, BDate, Salary, SSN, 
+    Employee_Type_name, Dept_Hire, Dept_Term, Hire_Date, 
+    Term_Date, Term_type, R_Provider_ID, H_Provider_ID 
+  } = req.body;
+
+  // Construct SQL query to update the employee record
+  const query = `
+    UPDATE employee
+    SET 
+      FName = ?, 
+      LName = ?, 
+      gender = ?, 
+      address = ?, 
+      BDate = ?, 
+      Salary = ?, 
+      Employee_Type_name = ?, 
+      Dept_Hire = ?, 
+      Dept_Term = ?, 
+      Hire_Date = ?, 
+      Term_Date = ?, 
+      Term_type = ?, 
+      R_Provider_ID = ?, 
+      H_Provider_ID = ?
+    WHERE 1
+  `;
+
+  // Values array for the query
+  const values = [
+    FName, LName, gender, address, BDate, Salary, 
+    Employee_Type_name, Dept_Hire, Dept_Term, Hire_Date, 
+    Term_Date, Term_type, R_Provider_ID, H_Provider_ID, SSN
+  ];
+
+  // Execute the query
+  con.query(query, values, (err, result) => {
+    if (err) {
+      console.error('Error updating data:', err);
+      return res.status(500).json({ success: false, message: 'Failed to update employee record' });
+    }
+
+    if (result.affectedRows > 0) {
+      res.json({ success: true, message: 'Employee record updated successfully!' });
+    } else {
+      res.status(404).json({ success: false, message: 'Employee not found or no changes made' });
+    }
+  });
+});
+*/ 
+
+// DELETING RECORDS 
+app.delete('/api/delete-user', (req, res) => {
+  const Employee_ID = req.query.id;  // Get the ID from the query string
+  
+  // Check if the Employee_ID is provided
+  if (!Employee_ID) {
+      return res.status(400).json({ error: 'Employee ID is required' });
+  }
+
+  // Query the database to delete the user
+  const query = 'DELETE FROM employee WHERE Employee_ID = ?';
+  con.query(query, [Employee_ID], (err, result) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      return res.status(500).json({ success: false, message: 'Failed to delete user' });
+    }
+
+    if (result.affectedRows > 0) {
+      res.json({ success: true, message: 'User deleted successfully' });
+    } else {
+      res.status(404).json({ success: false, message: 'User not found' });
+    }
+  });
+});
+
+
+// API route to get employee data
+app.get('/api/get-employee', (req, res) => {
+  const Employee_ID = req.query.Employee_ID;  // Get the ID from the query string
+  
+  if (!Employee_ID) {
+     return res.status(400).json({ error: 'Employee ID is required' });
+  }
+
+  // Query the database to fetch employee data
+  const query = 'SELECT * FROM employees WHERE Employee_ID = ?';
+  db.query(query, [Employee_ID], (err, results) => {
+     if (err) {
+        return res.status(500).json({ error: 'Database query failed' });
+     }
+
+     if (results.length > 0) {
+        // Send the employee data back as a JSON response
+        res.json(results[0]);
+     } else {
+        res.status(404).json({ error: 'Employee not found' });
+     }
+  });
+});
+
+// GET endpoint to retrieve all users
+app.get('/api/get-users', (req, res) => {
+  const query = 'SELECT * FROM employee';
+
+  con.query(query, (err, results) => {
+      if (err) {
+          console.error('Error fetching data:', err);
+          return res.status(500).json({ success: false, message: 'Failed to retrieve users.' });
+      }
+
+      res.json(results);
+  });
+});
 
 
 /*----------------------------------- ROUTING -----------------------------------*/
@@ -655,18 +793,3 @@ app.all('*', function (request, response, next) {// This must be at the end!
 });
 
 app.listen(8080, () => console.log(`listening on port 8080`));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
