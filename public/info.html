@@ -4,46 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EMSync2</title>
-    <link rel="stylesheet" href="./css/style.css">
     <script src="./functions.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        /* Image Container */
+        .image-container {
+            position: relative;
+            text-align: center;
+            color: rgb(36, 34, 34);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            opacity: 0.8;
+        }
+
+        /* Transparent Card Styling */
+        .card.overlay {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            max-width: 280px;
+            margin: 15px auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Form Label */
+        label {
+            display: block;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 0 5px;
+            color: #333;
+        }
+
+        /* Dropdown and Input Field Styling */
+        #tableSelect, #employeeID {
+            width: calc(100% - 16px);
+            padding: 8px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            margin: 5px 0 10px;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #tableSelect:focus, #employeeID:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
+        }
+
+        /* Submit Button Styling */
+        button {
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #175c3b, #05842b);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.03);
+            box-shadow: 0 3px 8px rgba(0, 123, 255, 0.3);
+        }
+
+        button:active {
+            transform: scale(1);
+            box-shadow: 0 1px 4px rgba(0, 123, 255, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .card.overlay {
+                max-width: 85%;
+                padding: 15px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!------------------------------------ Navigation Bar & Header ------------------------------------>
-   <script>navBar1();</script>
-    <!------------------------------------ Navigation Bar & Header end ------------------------------------>
+    <!-- Navigation Bar -->
+    <script>navBar1();</script>
 
     <!-- Full-Width Image with Overlay -->
-<div class="image-container">
-    <img src="./images/hawaiihall.jpg" alt="Hawaii Hall">
-    <section id="quick-search" class="card overlay">
-        <h2>EmSync Logo</h2>
-        </form>
-    </section>
-</div>
-
-    <!-- Main Content -->
-    <main>
-        <h1>Retrieve Employee Information</h1>
-        <form method="POST" action="./retrieveInfo">
-            <label for="tableSelect">Select Table:</label>
-            <select name="table" id="tableSelect" required>
-                <option value="applicant">Applicant</option>
-                <option value="bank_account">Bank Account</option>
-                <option value="employee">Employee</option>
-                <option value="evaluation">Evaluation</option>
-                <option value="grievance">Grievance</option>
-                <option value="health_insurance_provider">Health Insurance Provider</option>
-                <option value="retirement_benefits_provider">Retirement Benefits Provider</option>
-                <option value="timesheets">Timesheets</option>
-                <option value="training">Training</option>
-            </select>
-            <br><br>
-            <label for="employeeID">Employee Number:</label>
-            <input type="text" name="employeeID" id="employeeID" required>
-            <br><br>
-            <button type="submit">Submit</button>
-        </form>
-    </main>
+    <div class="image-container">
+        <img src="./images/hawaiihall.jpg" alt="Hawaii Hall">
+        <section id="quick-search" class="card overlay">
+            <h2>Retrieve Employee Information</h2>
+            <form method="POST" action="./retrieveInfo">
+                <label for="tableSelect">Select Table:</label>
+                <select name="table" id="tableSelect" required>
+                    <option value="applicant">Applicant</option>
+                    <option value="bank_account">Bank Account</option>
+                    <option value="employee">Employee</option>
+                    <option value="evaluation">Evaluation</option>
+                    <option value="grievance">Grievance</option>
+                    <option value="health_insurance_provider">Health Insurance Provider</option>
+                    <option value="retirement_benefits_provider">Retirement Benefits Provider</option>
+                    <option value="timesheets">Timesheets</option>
+                    <option value="training">Training</option>
+                </select>
+                <label for="employeeID">Employee Number:</label>
+                <input type="text" name="employeeID" id="employeeID" required>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </div>
 
     <!-- Footer -->
     <footer>

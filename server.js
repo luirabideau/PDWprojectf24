@@ -1,6 +1,4 @@
-/*---------- Created by Lui Rabideau, Xin Lin, Tassia Cocoran, Emma Sharp, and Jessica Bandol ----------*/
 /* Incorporated into the design from W3schools: W3.CSS 4.15 December 2020 by Jan Egil and Borge Refsnes */
-/*------------------------- Lui Rabideau's F2023 ITM352 Assignment 3 Template --------------------------*/
 /*-------------------------------------- UHM ITM354 Final Project --------------------------------------*/
 
 var express = require('express');
@@ -277,7 +275,7 @@ app.get('/retrieveGenderratio', (req, res) => {
                 COUNT(*) AS count,
                 ROUND((COUNT(*) / (SELECT COUNT(*) FROM employee) * 100), 2) AS percentage
                 FROM employee
-                WHERE Term_Date IS NULL
+                WHERE Term_type IS NULL
                 GROUP BY gender;
                 `;
   con.query(query, (err, results) => {
@@ -292,7 +290,7 @@ app.get('/retrieveGenderratio', (req, res) => {
 
 // Demographic; Q2
 app.get('/retrieveGenderratiodept', (req, res) => {
-  const query = `SELECT Dept_Hire, gender, COUNT(*) AS count, ROUND((COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY Dept_Hire) * 100), 2) AS percentage FROM employee WHERE Term_Date IS NULL GROUP BY Dept_Hire, gender ORDER BY Dept_Hire, gender;
+  const query = `SELECT Dept_Hire, gender, COUNT(*) AS count, ROUND((COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY Dept_Hire) * 100), 2) AS percentage FROM employee WHERE Term_type IS NULL GROUP BY Dept_Hire, gender ORDER BY Dept_Hire, gender;
                 `;
   con.query(query, (err, results) => {
       if (err) {
@@ -306,7 +304,7 @@ app.get('/retrieveGenderratiodept', (req, res) => {
 
 // Demographic; Q3
 app.get('/retrieveAgegroup', (req, res) => {
-  const query = `SELECT CASE WHEN TIMESTAMPDIFF(YEAR, BDate, CURDATE()) BETWEEN 21 AND 35 THEN '21-35' WHEN TIMESTAMPDIFF(YEAR, BDate, CURDATE()) BETWEEN 36 AND 59 THEN '36-59' WHEN TIMESTAMPDIFF(YEAR, BDate, CURDATE()) >= 60 THEN '60+' END AS age_range, COUNT(*) AS count FROM employee WHERE Term_Date IS NULL GROUP BY age_range ORDER BY age_range;
+  const query = `SELECT CASE WHEN TIMESTAMPDIFF(YEAR, BDate, CURDATE()) BETWEEN 21 AND 35 THEN '21-35' WHEN TIMESTAMPDIFF(YEAR, BDate, CURDATE()) BETWEEN 36 AND 59 THEN '36-59' WHEN TIMESTAMPDIFF(YEAR, BDate, CURDATE()) >= 60 THEN '60+' END AS age_range, COUNT(*) AS count FROM employee WHERE Term_type IS NULL GROUP BY age_range ORDER BY age_range;
                 `;
   con.query(query, (err, results) => {
       if (err) {
@@ -320,7 +318,7 @@ app.get('/retrieveAgegroup', (req, res) => {
 
 // Demographic; Q4
 app.get('/retrieveAgegroupdept', (req, res) => {
-  const query = `SELECT e.Dept_Hire, CASE WHEN TIMESTAMPDIFF(YEAR, e.BDate, CURDATE()) BETWEEN 21 AND 35 THEN '21-35' WHEN TIMESTAMPDIFF(YEAR, e.BDate, CURDATE()) BETWEEN 36 AND 59 THEN '36-59' WHEN TIMESTAMPDIFF(YEAR, e.BDate, CURDATE()) >= 60 THEN '60+' END AS age_range, COUNT(*) AS count FROM employee e WHERE Term_Date IS NULL GROUP BY e.Dept_Hire, age_range ORDER BY e.Dept_Hire, age_range;
+  const query = `SELECT e.Dept_Hire, CASE WHEN TIMESTAMPDIFF(YEAR, e.BDate, CURDATE()) BETWEEN 21 AND 35 THEN '21-35' WHEN TIMESTAMPDIFF(YEAR, e.BDate, CURDATE()) BETWEEN 36 AND 59 THEN '36-59' WHEN TIMESTAMPDIFF(YEAR, e.BDate, CURDATE()) >= 60 THEN '60+' END AS age_range, COUNT(*) AS count FROM employee e WHERE Term_type IS NULL GROUP BY e.Dept_Hire, age_range ORDER BY e.Dept_Hire, age_range;
                 `;
   con.query(query, (err, results) => {
       if (err) {
@@ -334,7 +332,7 @@ app.get('/retrieveAgegroupdept', (req, res) => {
 
 // Demographic; Q5
 app.get('/retrieveJobtype', (req, res) => {
-  const query = `SELECT Employee_Type_Name, COUNT(*) AS count FROM employee WHERE Term_Date IS NULL GROUP BY Employee_Type_Name ORDER BY count DESC;
+  const query = `SELECT Employee_Type_Name, COUNT(*) AS count FROM employee WHERE Term_type IS NULL GROUP BY Employee_Type_Name ORDER BY count DESC;
                 `;
   con.query(query, (err, results) => {
       if (err) {
@@ -348,7 +346,7 @@ app.get('/retrieveJobtype', (req, res) => {
 
 // Demographic; Q6
 app.get('/retrieveJobtypedept', (req, res) => {
-  const query = `WITH department_job_types AS ( SELECT d.Dept_Hire, t.Employee_Type_Name FROM (SELECT DISTINCT Dept_Hire FROM employee) d CROSS JOIN (SELECT DISTINCT Employee_Type_Name FROM employee) t ) SELECT dj.Dept_Hire, dj.Employee_Type_Name, COUNT(e.Employee_ID) AS count FROM department_job_types dj LEFT JOIN employee e ON dj.Dept_Hire = e.Dept_Hire AND dj.Employee_Type_Name = e.Employee_Type_Name AND e.Term_Date IS NULL GROUP BY dj.Dept_Hire, dj.Employee_Type_Name ORDER BY dj.Dept_Hire ASC, dj.Employee_Type_Name ASC;
+  const query = `WITH department_job_types AS ( SELECT d.Dept_Hire, t.Employee_Type_Name FROM (SELECT DISTINCT Dept_Hire FROM employee) d CROSS JOIN (SELECT DISTINCT Employee_Type_Name FROM employee) t ) SELECT dj.Dept_Hire, dj.Employee_Type_Name, COUNT(e.Employee_ID) AS count FROM department_job_types dj LEFT JOIN employee e ON dj.Dept_Hire = e.Dept_Hire AND dj.Employee_Type_Name = e.Employee_Type_Name AND e.Term_type IS NULL GROUP BY dj.Dept_Hire, dj.Employee_Type_Name ORDER BY dj.Dept_Hire ASC, dj.Employee_Type_Name ASC;
                 `;
   con.query(query, (err, results) => {
       if (err) {
@@ -364,7 +362,7 @@ app.get('/retrieveJobtypedept', (req, res) => {
 
 // Turnover; Q1
 app.get('/retrieveRetentiondept', (req, res) => {
-  const query = `SELECT Dept_Hire, AVG(TIMESTAMPDIFF(MONTH, Hire_Date, Term_Date)) AS average_retention_months FROM employee WHERE Term_Date IS NOT NULL GROUP BY Dept_Hire ORDER BY average_retention_months DESC;
+  const query = `SELECT Dept_Hire, AVG(TIMESTAMPDIFF(MONTH, Hire_Date, Term_Date)) AS average_retention_months FROM employee WHERE Term_type IS NOT NULL GROUP BY Dept_Hire ORDER BY average_retention_months DESC;
                 `;
   con.query(query, (err, results) => {
       if (err) {
@@ -378,7 +376,7 @@ app.get('/retrieveRetentiondept', (req, res) => {
 
 // Turnover; Q2
 app.get('/retrieveRetentionjobtype', (req, res) => {
-  const query = `SELECT Employee_Type_Name, AVG(TIMESTAMPDIFF(MONTH, Hire_Date, Term_Date)) AS average_retention_months FROM employee WHERE Term_Date IS NOT NULL GROUP BY Employee_Type_Name ORDER BY average_retention_months DESC;
+  const query = `SELECT Employee_Type_Name, AVG(TIMESTAMPDIFF(MONTH, Hire_Date, Term_Date)) AS average_retention_months FROM employee WHERE Term_type IS NOT NULL GROUP BY Employee_Type_Name ORDER BY average_retention_months DESC;
                 `;
   con.query(query, (err, results) => {
       if (err) {
@@ -392,7 +390,7 @@ app.get('/retrieveRetentionjobtype', (req, res) => {
 
 // Turnover; Q3
 app.get('/retrieveRetentionjobtypedept', (req, res) => {
-  const query = `SELECT Dept_Hire, Employee_Type_Name, AVG(TIMESTAMPDIFF(MONTH, Hire_Date, Term_Date)) AS average_retention_months FROM employee WHERE Term_Date IS NOT NULL GROUP BY Dept_Hire, Employee_Type_Name ORDER BY Dept_Hire, average_retention_months DESC;
+  const query = `SELECT Dept_Hire, Employee_Type_Name, AVG(TIMESTAMPDIFF(MONTH, Hire_Date, Term_Date)) AS average_retention_months FROM employee WHERE Term_type IS NOT NULL GROUP BY Dept_Hire, Employee_Type_Name ORDER BY Dept_Hire, average_retention_months DESC;
                 `;
   con.query(query, (err, results) => {
       if (err) {
@@ -406,7 +404,7 @@ app.get('/retrieveRetentionjobtypedept', (req, res) => {
 
 // Turnover; Q4
 app.get('/retrieveTermjobtype', (req, res) => {
-  const query = `SELECT t.Term_Type, COUNT(e.Term_Type) AS terminated_count FROM (SELECT DISTINCT Term_Type FROM employee WHERE Term_Type IS NOT NULL UNION SELECT 'end_of_contract' UNION SELECT 'Retirement' UNION SELECT 'Resignation' UNION SELECT 'poor_evaluation') t LEFT JOIN employee e ON t.Term_Type = e.Term_Type WHERE e.Term_Type IS NOT NULL OR e.Term_Type IS NULL GROUP BY t.Term_Type ORDER BY terminated_count DESC;
+  const query = `SELECT t.Term_Type, COUNT(e.Term_Type) AS terminated_count FROM (SELECT DISTINCT Term_Type FROM employee WHERE Term_type IS NOT NULL UNION SELECT 'end_of_contract' UNION SELECT 'Retirement' UNION SELECT 'Resignation' UNION SELECT 'poor_evaluation') t LEFT JOIN employee e ON t.Term_Type = e.Term_Type WHERE e.Term_type IS NOT NULL OR e.Term_type IS NULL GROUP BY t.Term_Type ORDER BY terminated_count DESC;
                 `;
   con.query(query, (err, results) => {
       if (err) {
@@ -420,7 +418,7 @@ app.get('/retrieveTermjobtype', (req, res) => {
 
 // Turnover; Q5
 app.get('/retrieveTermjobtypedept', (req, res) => {
-  const query = `SELECT d.Dept_Hire, t.Term_Type, COUNT(e.Term_Type) AS terminated_count FROM (SELECT DISTINCT Dept_Hire FROM employee) d CROSS JOIN (SELECT DISTINCT Term_Type FROM employee WHERE Term_Type IS NOT NULL) t LEFT JOIN employee e ON d.Dept_Hire = e.Dept_Hire AND t.Term_Type = e.Term_Type WHERE e.Term_Type IS NOT NULL OR e.Term_Type IS NULL GROUP BY d.Dept_Hire, t.Term_Type ORDER BY d.Dept_Hire, terminated_count DESC;
+  const query = `SELECT d.Dept_Hire, t.Term_Type, COUNT(e.Term_Type) AS terminated_count FROM (SELECT DISTINCT Dept_Hire FROM employee) d CROSS JOIN (SELECT DISTINCT Term_Type FROM employee WHERE Term_type IS NOT NULL) t LEFT JOIN employee e ON d.Dept_Hire = e.Dept_Hire AND t.Term_Type = e.Term_Type WHERE e.Term_type IS NOT NULL OR e.Term_type IS NULL GROUP BY d.Dept_Hire, t.Term_Type ORDER BY d.Dept_Hire, terminated_count DESC;
                 `;
   con.query(query, (err, results) => {
       if (err) {
@@ -434,7 +432,7 @@ app.get('/retrieveTermjobtypedept', (req, res) => {
 
 // Turnover; Q6
 app.get('/retrieveTermrate6mo', (req, res) => {
-  const query = `WITH last_six_months AS ( SELECT DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL n.num MONTH), '%Y-%m') AS term_month FROM (SELECT 0 AS num UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5) n ) SELECT m.term_month, COUNT(e.Term_Date) AS terminated_count, ROUND((COUNT(e.Term_Date) / (SELECT COUNT(*) FROM employee) * 100), 2) AS termination_rate_percentage FROM last_six_months m LEFT JOIN employee e ON DATE_FORMAT(e.Term_Date, '%Y-%m') = m.term_month WHERE e.Term_Date IS NULL OR e.Term_Date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH) GROUP BY m.term_month ORDER BY m.term_month ASC;
+  const query = `WITH last_six_months AS ( SELECT DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL n.num MONTH), '%Y-%m') AS term_month FROM (SELECT 0 AS num UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5) n ) SELECT m.term_month, COUNT(e.Term_Date) AS terminated_count, ROUND((COUNT(e.Term_Date) / (SELECT COUNT(*) FROM employee) * 100), 2) AS termination_rate_percentage FROM last_six_months m LEFT JOIN employee e ON DATE_FORMAT(e.Term_Date, '%Y-%m') = m.term_month WHERE e.Term_type IS NULL OR e.Term_Date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH) GROUP BY m.term_month ORDER BY m.term_month ASC;
                 `;
   con.query(query, (err, results) => {
       if (err) {
@@ -448,7 +446,7 @@ app.get('/retrieveTermrate6mo', (req, res) => {
 
 // Turnover; Q7
 app.get('/retrieveTermgrievance', (req, res) => {
-  const query = `SELECT e.Employee_ID, CONCAT(e.FName, ' ', e.LName) AS Employee_Name, COUNT(g.Employee_ID) AS grievance_count FROM employee e LEFT JOIN grievance g ON e.Employee_ID = g.Employee_ID WHERE e.Term_Date IS NOT NULL GROUP BY e.Employee_ID, e.FName, e.LName ORDER BY grievance_count DESC;
+  const query = `SELECT e.Employee_ID, CONCAT(e.FName, ' ', e.LName) AS Employee_Name, COUNT(g.Employee_ID) AS grievance_count FROM employee e LEFT JOIN grievance g ON e.Employee_ID = g.Employee_ID WHERE e.Term_type IS NOT NULL GROUP BY e.Employee_ID, e.FName, e.LName ORDER BY grievance_count DESC;
                 `;
   con.query(query, (err, results) => {
       if (err) {
@@ -463,7 +461,7 @@ app.get('/retrieveTermgrievance', (req, res) => {
 
 // Salary; Q1
 app.get('/retrieveAvgsalarydept', (req, res) => {
-  const query = `SELECT Dept_Hire, ROUND(AVG(Salary), 2) AS average_salary, ROUND(MIN(Salary), 2) AS min_salary, ROUND(MAX(Salary), 2) AS max_salary FROM employee WHERE Term_Date IS NULL GROUP BY Dept_Hire ORDER BY average_salary DESC;
+  const query = `SELECT Dept_Hire, ROUND(AVG(Salary), 2) AS average_salary, ROUND(MIN(Salary), 2) AS min_salary, ROUND(MAX(Salary), 2) AS max_salary FROM employee WHERE Term_type IS NULL GROUP BY Dept_Hire ORDER BY average_salary DESC;
                 `;
   con.query(query, (err, results) => {
       if (err) {
@@ -478,7 +476,7 @@ app.get('/retrieveAvgsalarydept', (req, res) => {
 
 // Salary; Q2
 app.get('/retrieveAvgsalaryjobtype', (req, res) => {
-  const query = `SELECT Employee_Type_Name, COUNT(*) AS employee_count, ROUND(AVG(Salary), 2) AS average_salary, ROUND(MIN(Salary), 2) AS min_salary, ROUND(MAX(Salary), 2) AS max_salary FROM employee WHERE Term_Date IS NULL GROUP BY Employee_Type_Name ORDER BY average_salary DESC;
+  const query = `SELECT Employee_Type_Name, COUNT(*) AS employee_count, ROUND(AVG(Salary), 2) AS average_salary, ROUND(MIN(Salary), 2) AS min_salary, ROUND(MAX(Salary), 2) AS max_salary FROM employee WHERE Term_type IS NULL GROUP BY Employee_Type_Name ORDER BY average_salary DESC;
                 `;
   con.query(query, (err, results) => {
       if (err) {
@@ -492,7 +490,7 @@ app.get('/retrieveAvgsalaryjobtype', (req, res) => {
 
 // Salary; Q3
 app.get('/retrieveAvgsalaryjobtypedept', (req, res) => {
-  const query = `WITH department_job_types AS ( SELECT d.Dept_Hire, t.Employee_Type_Name FROM (SELECT DISTINCT Dept_Hire FROM employee) d CROSS JOIN (SELECT DISTINCT Employee_Type_Name FROM employee) t ) SELECT dj.Dept_Hire, dj.Employee_Type_Name, ROUND(IFNULL(AVG(e.Salary), 0), 2) AS average_salary, ROUND(IFNULL(MIN(e.Salary), 0), 2) AS min_salary, ROUND(IFNULL(MAX(e.Salary), 0), 2) AS max_salary FROM department_job_types dj LEFT JOIN employee e ON dj.Dept_Hire = e.Dept_Hire AND dj.Employee_Type_Name = e.Employee_Type_Name AND e.Term_Date IS NULL GROUP BY dj.Dept_Hire, dj.Employee_Type_Name ORDER BY dj.Dept_Hire, FIELD(dj.Employee_Type_Name, 'CASUAL', 'GA', 'AsstProf', 'Prof') DESC;
+  const query = `WITH department_job_types AS ( SELECT d.Dept_Hire, t.Employee_Type_Name FROM (SELECT DISTINCT Dept_Hire FROM employee) d CROSS JOIN (SELECT DISTINCT Employee_Type_Name FROM employee) t ) SELECT dj.Dept_Hire, dj.Employee_Type_Name, ROUND(IFNULL(AVG(e.Salary), 0), 2) AS average_salary, ROUND(IFNULL(MIN(e.Salary), 0), 2) AS min_salary, ROUND(IFNULL(MAX(e.Salary), 0), 2) AS max_salary FROM department_job_types dj LEFT JOIN employee e ON dj.Dept_Hire = e.Dept_Hire AND dj.Employee_Type_Name = e.Employee_Type_Name AND e.Term_type IS NULL GROUP BY dj.Dept_Hire, dj.Employee_Type_Name ORDER BY dj.Dept_Hire, FIELD(dj.Employee_Type_Name, 'CASUAL', 'GA', 'AsstProf', 'Prof') DESC;
                 `;
   con.query(query, (err, results) => {
       if (err) {
@@ -506,7 +504,7 @@ app.get('/retrieveAvgsalaryjobtypedept', (req, res) => {
 
 // Salary; Q4
 app.get('/retrieveAvgsalarygender', (req, res) => {
-  const query = `SELECT gender, ROUND(AVG(Salary), 2) AS average_salary, ROUND(MIN(Salary), 2) AS min_salary, ROUND(MAX(Salary), 2) AS max_salary FROM employee WHERE Term_Date IS NULL GROUP BY gender ORDER BY average_salary DESC;
+  const query = `SELECT gender, ROUND(AVG(Salary), 2) AS average_salary, ROUND(MIN(Salary), 2) AS min_salary, ROUND(MAX(Salary), 2) AS max_salary FROM employee WHERE Term_type IS NULL GROUP BY gender ORDER BY average_salary DESC;
                 `;
   con.query(query, (err, results) => {
       if (err) {
@@ -520,7 +518,7 @@ app.get('/retrieveAvgsalarygender', (req, res) => {
 
 // Salary; Q5
 app.get('/retrieveTop10salary', (req, res) => {
-  const query = `SELECT e.Employee_ID, e.FName, e.LName, e.Dept_Hire, e.Employee_Type_Name, ROUND(e.Salary, 2) AS salary FROM employee e WHERE e.Term_Date IS NULL ORDER BY e.Salary DESC LIMIT 10;
+  const query = `SELECT e.Employee_ID, e.FName, e.LName, e.Dept_Hire, e.Employee_Type_Name, ROUND(e.Salary, 2) AS salary FROM employee e WHERE e.Term_type IS NULL ORDER BY e.Salary DESC LIMIT 10;
                 `;
   con.query(query, (err, results) => {
       if (err) {
@@ -551,7 +549,62 @@ app.get('/retrieveAvgraisedept', (req, res) => {
 /*---------------------------------- REPORTS STUFF END ----------------------------------*/
 
 
+/* ----- POST ROUTE TO ADD TO GRIEVANCE TABLE START ------*/
+app.post('/add-grievance', (req, res) => {
+  const { Grievance_Union_ID, grievance_type, Complaint_Description } = req.body;
 
+  // Assign Employee_ID to the fixed value
+  const EmployeeID = 1000123456;
+
+  // Use current date for Grievance_Date
+  const Grievancedate = new Date().toISOString().slice(0, 10); // Format: YYYY-MM-DD
+
+  // Function to generate a random 10-digit number
+  const generateRandomID = () => {
+      return Math.floor(1000000000 + Math.random() * 9000000000);
+  };
+
+  const generateUniqueGrievanceID = async () => {
+      return new Promise((resolve, reject) => {
+          const id = generateRandomID();
+          const checkQuery = 'SELECT COUNT(*) as count FROM grievance WHERE Grievance_ID = ?';
+
+          con.query(checkQuery, [id], (err, results) => {
+              if (err) return reject(err);
+
+              if (results[0].count === 0) {
+                  resolve(id); // Unique ID found
+              } else {
+                  resolve(generateUniqueGrievanceID()); // Retry if not unique
+              }
+          });
+      });
+  };
+
+  // Generate unique Grievance_ID and insert the record
+  generateUniqueGrievanceID()
+      .then((GrievanceID) => {
+          const sql = `INSERT INTO grievance (Grievance_ID, Employee_ID, Grievance_Date, Grievance_Union_ID, grievance_type, Complaint_Description) 
+                       VALUES (?, ?, ?, ?, ?, ?)`;
+
+          const values = [GrievanceID, EmployeeID, Grievancedate, Grievance_Union_ID, grievance_type, Complaint_Description];
+
+          con.query(sql, values, (err, result) => {
+              if (err) {
+                  console.error('Error inserting data: ', err);
+                  return res.status(500).json({ success: false, message: 'Failed to insert data.' });
+              }
+
+              // Redirect to Grievances.html with a success message
+              res.redirect(`/Grievances.html?message=New%20record%20created%20successfully`);
+          });
+      })
+      .catch((err) => {
+          console.error('Error generating unique Grievance_ID: ', err);
+          res.status(500).json({ success: false, message: 'Failed to generate unique Grievance_ID.' });
+      });
+});
+/* ----- POST ROUTE TO ADD TO GRIEVANCE TABLE END ------*/
 
 
 

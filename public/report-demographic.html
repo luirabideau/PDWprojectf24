@@ -8,46 +8,105 @@
     <script src="./functions.js"></script>
 
     <style>
-        table {
-            width: 60%;
-            margin: 20px auto;
-            border-collapse: collapse;
+        /* Body and Overall Layout */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f9;
+            margin: 0;
+            padding: 0;
         }
-        th, td {
-            padding: 10px;
+
+        h1 {
             text-align: center;
-            border: 1px solid #ddd;
+            font-size: 24px;
+            color: #333;
+            margin: 30px 0;
+            text-transform: uppercase;
         }
+
+        /* Table Container */
+        table {
+            width: 80%; /* Increase table width */
+            margin: 30px auto;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Table Header */
         th {
-            background-color: #f4f4f4;
+            background-color: #007BFF; /* Blue background for headers */
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
         }
+
+        /* Table Body */
+        td {
+            padding: 12px;
+            text-align: center;
+            font-size: 13px;
+            border-bottom: 1px solid #ddd;
+        }
+
         tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: #f9f9f9; /* Alternate row colors */
+        }
+
+        tr:last-child td {
+            border-bottom: none; /* Remove border from last row */
+        }
+
+        /* Hover Effects for Table Rows */
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            table {
+                width: 100%;
+                margin: 20px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+
+            td, th {
+                padding: 10px;
+                font-size: 12px;
+            }
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 5px 0;
+            font-size: 14px;
         }
     </style>
-
-
-
 </head>
 <body>
     <!------------------------------------ Navigation Bar & Header ------------------------------------>
-   <script>navBar1();</script>
+    <script>navBar1();</script>
     <!------------------------------------ Navigation Bar & Header end ------------------------------------>
-
-    <!-- Full-Width Image with Overlay -->
- <!--<div class="image-container">
-    <img src="./images/hawaiihall.jpg" alt="Hawaii Hall">
-    <section id="quick-search" class="card overlay">
-        <h2>EmSync Logo</h2>
-        </form>
-    </section>
-</div> -->
 
     <!-- Main Content -->
     <main>
-
-
-        <h1 style="text-align: center;">CALL Employee Gender Ratio</h1>
+        <h1>CALL Employee Gender Ratio</h1>
         <table id="genderratioTable">
             <thead>
                 <tr>
@@ -61,7 +120,12 @@
             </tbody>
         </table>
 
-        <h1 style="text-align: center;">Department Employee Gender Ratio</h1>
+        <div style="display: flex; justify-content: center; width: 100%; max-width: 600px; margin: 0 auto;">
+            <img src="./images/gender_ratio.png" alt="Gender Ratio" style="width: 100%; height: auto; display: block;">
+        </div>
+        
+
+        <h1>Department Employee Gender Ratio</h1>
         <table id="genderratiodeptTable">
             <thead>
                 <tr>
@@ -76,7 +140,7 @@
             </tbody>
         </table>
 
-        <h1 style="text-align: center;">CALL Age Groups</h1>
+        <h1>CALL Age Groups</h1>
         <table id="agegroupTable">
             <thead>
                 <tr>
@@ -89,7 +153,11 @@
             </tbody>
         </table>
 
-        <h1 style="text-align: center;">Department Age Groups</h1>
+        <div style="display: flex; justify-content: center; width: 100%; max-width: 600px; margin: 0 auto;">
+            <img src="./images/age_groups.png" alt="Gender Ratio" style="width: 100%; height: auto; display: block;">
+        </div>
+
+        <h1>Department Age Groups</h1>
         <table id="agegroupdeptTable">
             <thead>
                 <tr>
@@ -103,7 +171,7 @@
             </tbody>
         </table>
 
-        <h1 style="text-align: center;">CALL Job Type Spread</h1>
+        <h1>CALL Job Type Spread</h1>
         <table id="jobtypeTable">
             <thead>
                 <tr>
@@ -116,7 +184,11 @@
             </tbody>
         </table>
 
-        <h1 style="text-align: center;">Department Job Type Spread</h1>
+        <div style="display: flex; justify-content: center; width: 100%; max-width: 600px; margin: 0 auto;">
+            <img src="./images/job_spread.png" alt="Gender Ratio" style="width: 100%; height: auto; display: block;">
+        </div>
+
+        <h1>Department Job Type Spread</h1>
         <table id="jobtypedeptTable">
             <thead>
                 <tr>
@@ -129,7 +201,7 @@
                 <!-- Table rows will be inserted dynamically here -->
             </tbody>
         </table>
-        
+
         <!-- Q1 script -->
         <script>
             document.addEventListener('DOMContentLoaded', function () {
@@ -260,9 +332,6 @@
                     .catch(error => console.error('Error fetching jobtypedept data:', error));
             });
         </script>
-
-
-
 
     </main>
 

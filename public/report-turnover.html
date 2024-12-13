@@ -6,26 +6,97 @@
     <title>EMSync2</title>
     <link rel="stylesheet" href="./css/style.css">
     <script src="./functions.js"></script>
+<style>
+    /* Body and Overall Layout */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f7f9;
+        margin: 0;
+        padding: 0;
+    }
 
-    <style>
+    h1 {
+        text-align: center;
+        font-size: 24px;
+        color: #333;
+        margin: 30px 0;
+        text-transform: uppercase;
+    }
+
+    /* Table Container */
+    table {
+        width: 80%; /* Increase table width */
+        margin: 30px auto;
+        border-collapse: collapse;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    /* Table Header */
+    th {
+        background-color: #007BFF; /* Blue background for headers */
+        color: white;
+        padding: 12px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    /* Table Body */
+    td {
+        padding: 12px;
+        text-align: center;
+        font-size: 13px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9; /* Alternate row colors */
+    }
+
+    tr:last-child td {
+        border-bottom: none; /* Remove border from last row */
+    }
+
+    /* Hover Effects for Table Rows */
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
         table {
-            width: 60%;
-            margin: 20px auto;
-            border-collapse: collapse;
+            width: 100%;
+            margin: 20px;
         }
-        th, td {
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #ddd;
+        
+        h1 {
+            font-size: 20px;
         }
-        th {
-            background-color: #f4f4f4;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-    </style>
 
+        td, th {
+            padding: 10px;
+            font-size: 12px;
+        }
+    }
+
+    /* Footer Styling */
+    footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        margin-top: 40px;
+    }
+
+    footer p {
+        margin: 5px 0;
+        font-size: 14px;
+    }
+</style>
 
 
 </head>
@@ -43,11 +114,11 @@
     </section>
 </div> -->
 
-    <!-- Main Content -->
-    <main>
+     <!-- Main Content -->
+     <main>
 
 
-        <h1 style="text-align: center;">Averge Retention for Departments</h1>
+        <h1 style="text-align: center;">Average Retention for Departments</h1>
         <table id="retentiondeptTable">
             <thead>
                 <tr>
@@ -59,6 +130,11 @@
                 <!-- Table rows will be inserted dynamically here -->
             </tbody>
         </table>
+
+        <div style="display: flex; justify-content: center; width: 100%; max-width: 600px; margin: 0 auto;">
+            <img src="./images/avg_retention_job_dept.png" alt="Gender Ratio" style="height: 400px; width: auto; display: block; object-fit: contain;">
+        </div>
+        
 
         <h1 style="text-align: center;">Average Retention by Job Type</h1>
         <table id="retentionjobtypeTable">
@@ -72,6 +148,13 @@
                 <!-- Table rows will be inserted dynamically here -->
             </tbody>
         </table>
+
+        <div style="display: flex; justify-content: center; width: 100%; max-width: 600px; margin: 0 auto;">
+            <img src="./images/avg_retention_jobtype.png" alt="Gender Ratio" style="height: 400px; width: auto; display: block; object-fit: contain;">
+        </div>
+        
+        
+        
 
         <h1 style="text-align: center;">Average Retention by Job Type for Departments</h1>
         <table id="retentionjobtypedeptTable">
